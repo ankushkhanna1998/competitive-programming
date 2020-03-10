@@ -1,8 +1,9 @@
 class dsu {
 public:
 
-    vector<int> p, sz;
     int n;
+
+    vector<int> p, sz;
 
     inline dsu(int _n) : n(_n) {
         sz.assign(n, 1);

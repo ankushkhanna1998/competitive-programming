@@ -19,7 +19,6 @@ inline long mul(long a, long b, const long M = MOD) {
 }
 
 inline long power(long a, long b, const long M = MOD) {
-    assert(b >= 0L);
     long ans = 1L;
     while (b) {
         if (b & 1L) {
@@ -32,6 +31,5 @@ inline long power(long a, long b, const long M = MOD) {
 }
 
 inline long inverse(long a, const long M = MOD) {
-    assert(__gcd(a, M) == 1L && M >= 2L);
     return power(a, M - 2L, M);
 }
