@@ -19,6 +19,7 @@ inline long mul(long a, long b, const long M = MOD) {
 }
 
 inline long power(long a, long b, const long M = MOD) {
+    assert(b >= 0L);
     long ans = 1L;
     while (b) {
         if (b & 1L) {
@@ -31,5 +32,21 @@ inline long power(long a, long b, const long M = MOD) {
 }
 
 inline long inverse(long a, const long M = MOD) {
-    return power(a, M - 2L, M);
+    a %= M;
+    if (a < 0L) {
+        a += M;
+    }
+    long b = M, u = 0L, v = 1L;
+    while (a) {
+        long t = b / a;
+        b -= t * a;
+        u -= t * v;
+        swap(a, b);
+        swap(u, v);
+    }
+    assert(b == 1L);
+    if (u < 0L) {
+        u += M;
+    }
+    return u;
 }
