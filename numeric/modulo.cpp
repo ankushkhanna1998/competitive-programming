@@ -23,9 +23,9 @@ inline long power(long a, long b, const long M = MOD) {
     long ans = 1L;
     while (b) {
         if (b & 1L) {
-            ans = mul(ans, a);
+            ans = mul(ans, a, M);
         }
-        a = mul(a, a);
+        a = mul(a, a, M);
         b >>= 1L;
     }
     return ans;
