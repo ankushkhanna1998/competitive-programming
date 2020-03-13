@@ -41,8 +41,12 @@ inline long inverse(long a, const long M = MOD) {
         long t = b / a;
         b -= t * a;
         u -= t * v;
-        swap(a, b);
-        swap(u, v);
+        a ^= b;
+        b ^= a;
+        a ^= b;
+        u ^= v;
+        v ^= u;
+        u ^= v;
     }
     assert(b == 1L);
     if (u < 0L) {
