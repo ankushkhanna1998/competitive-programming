@@ -24,4 +24,5 @@ inline vector<int> phi_all(int n) {
             }
         }
     }
+    return phi;
 }
