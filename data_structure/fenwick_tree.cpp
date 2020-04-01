@@ -6,9 +6,7 @@ public:
 
     vector<T> fenw;
 
-    inline fenwick_tree(int _n) : n(_n) {
-        fenw.resize(n);
-    }
+    inline fenwick_tree(int _n) : n(_n), fenw(_n) {}
 
     inline void add(int x, T delta) {
         while (x < n) {
@@ -21,8 +19,7 @@ public:
         T res = static_cast<T>(0L);
         while (x >= 0) {
             res += fenw[x];
-            x &= x + 1;
-            x--;
+            x = (x & (x + 1)) - 1;
         }
         return res;
     }
