@@ -32,21 +32,11 @@ inline long power(long a, long b, const long M = MOD) {
 }
 
 inline long inverse(long a, const long M = MOD) {
-    a %= M;
-    if (a < 0L) {
-        a += M;
-    }
     long b = M, u = 0L, v = 1L;
     while (a) {
         long t = b / a;
-        b -= t * a;
-        u -= t * v;
-        a ^= b;
-        b ^= a;
-        a ^= b;
-        u ^= v;
-        v ^= u;
-        u ^= v;
+        b -= t * a; swap(a, b);
+        u -= t * v; swap(u, v);
     }
     assert(b == 1L);
     if (u < 0L) {
