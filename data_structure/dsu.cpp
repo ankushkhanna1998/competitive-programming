@@ -5,9 +5,7 @@ public:
 
     vector<int> p, sz;
 
-    inline dsu(int _n) : n(_n) {
-        sz.assign(n, 1);
-        p.resize(n);
+    inline dsu(int _n) : n(_n), p(_n), sz(_n, 1) {
         iota(p.begin(), p.end(), 0);
     }
 
@@ -15,20 +13,18 @@ public:
         return (x == p[x] ? x : (p[x] = get(p[x])));
     }
 
-    inline bool unite(int x, int y) {
-        x = get(x);
-        y = get(y);
-        if (x != y) {
+    inline int size(int x) {
+        return sz[get(x)];
+    }
+
+    inline void unite(int x, int y) {
+        if ((x = get(x)) != (y = get(y))) {
             if (sz[y] > sz[x]) {
-                p[x] = y;
-                sz[y] += sz[x];
-            } else {
-                p[y] = x;
-                sz[x] += sz[y];
+                swap(x, y);
             }
-            return true;
+            p[y] = x;
+            sz[x] += sz[y];
         }
-        return false;
     }
 
 };
