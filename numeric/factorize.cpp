@@ -1,10 +1,7 @@
 template <typename T>
 inline vector<T> factorize(T n) {
-    vector<T> res;
-    while (!(n & 1)) {
-        n >>= 1;
-        res.push_back(2);
-    }
+    vector<T> res(__builtin_ctzll(n), 2);
+    n >>= res.size();
     for (T i = 3; i * i <= n; i += 2) {
         while (!(n % i)) {
             n /= i;
