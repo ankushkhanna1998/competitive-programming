@@ -9,7 +9,7 @@ public:
     inline fenwick_tree(int _n) : n(_n), fenw(_n) {}
 
     template <typename A>
-    inline fenwick_tree(const vector<A> a) : fenwick_tree(a.size()) {
+    inline fenwick_tree(const vector<A> a) : fenwick_tree((int) a.size()) {
         for (int i = 0; i < n; i++) {
             add(i, a[i]);
         }
