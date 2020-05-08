@@ -3,6 +3,10 @@ class segment_tree {
 
 private:
 
+    int n;
+
+    vector<T> tree, lazy;
+
     inline T unite(T u, T v) {
         return (u + v);
     }
@@ -55,10 +59,6 @@ private:
     }
 
 public:
-
-    int n;
-
-    vector<T> tree, lazy;
 
     template <typename A>
     inline segment_tree(const vector<A> a) : n(static_cast<int>(a.size())) {
