@@ -15,7 +15,7 @@ public:
         }
     }
 
-    inline void add(int x, T delta) const {
+    inline void add(int x, T delta) {
         while (x < n) {
             fenw[x] += delta;
             x |= x + 1;
