@@ -15,14 +15,14 @@ public:
         }
     }
 
-    inline void add(int x, T delta) {
+    inline void add(int x, T delta) const {
         while (x < n) {
             fenw[x] += delta;
             x |= x + 1;
         }
     }
 
-    inline T sum(int x) {
+    inline T sum(int x) const {
         T res = static_cast<T>(0L);
         while (x >= 0) {
             res += fenw[x];
@@ -31,7 +31,7 @@ public:
         return res;
     }
 
-    inline T sum(int l, int r) {
+    inline T sum(int l, int r) const {
         return sum(r) - sum(l - 1);
     }
 

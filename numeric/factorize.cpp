@@ -37,7 +37,7 @@ public:
         }
     }
 
-    inline vector<int> factorize(int n) {
+    inline vector<int> factorize(int n) const {
         assert(n > 0 && n <= MAXN);
         vector<int> res;
         while (n > 1) {

@@ -7,11 +7,11 @@ private:
 
     vector<T> tree, lazy;
 
-    inline T unite(T u, T v) {
+    inline T unite(T u, T v) const {
         return (u + v);
     }
 
-    inline void propagate(int v, int from, int to) {
+    inline void propagate(int v, int from, int to) const {
         if (lazy[v] != static_cast<T>(0L)) {
             tree[v] += lazy[v] * (to - from + 1);
             if (from != to) {
@@ -23,7 +23,7 @@ private:
         }
     }
 
-    inline void update(int v, int from, int to, int l, int r, T delta) {
+    inline void update(int v, int from, int to, int l, int r, T delta) const {
         propagate(v, from, to);
         if (from > to || from > r || to < l) {
             return;
@@ -43,11 +43,11 @@ private:
         tree[v] = unite(tree[tree_left], tree[tree_right]);
     }
 
-    inline T query(int v, int from, int to, int l, int r) {
+    inline T query(int v, int from, int to, int l, int r) const {
+        propagate(v, from, to);
         if (from > to || from > r || to < l) {
             return static_cast<T>(0L); // some "don't care" value
         }
-        propagate(v, from, to);
         if (from >= l && to <= r) {
             return tree[v];
         }
@@ -80,11 +80,11 @@ public:
         build(0, 0, n - 1);
     }
 
-    inline void update(int l, int r, T delta) {
+    inline void update(int l, int r, T delta) const {
         update(0, 0, n - 1, l, r, delta);
     }
 
-    inline T query(int l, int r) {
+    inline T query(int l, int r) const {
         return query(0, 0, n - 1, l, r);
     }
 
