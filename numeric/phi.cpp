@@ -1,10 +1,10 @@
-inline long phi(long n) {
-    long ans = n;
+inline int64_t phi(int64_t n) {
+    int64_t ans = n;
     n >>= __builtin_ctzll(n);
     if (ans != n) {
-        ans >>= 1L;
+        ans >>= 1;
     }
-    for (long i = 3L; i * i <= n; i += 2L) {
+    for (int64_t i = 3; i * i <= n; i += 2) {
         if (!(n % i)) {
             ans -= ans / i;
             while (!(n % i)) {
@@ -12,7 +12,7 @@ inline long phi(long n) {
             }
         }
     }
-    if (n > 2L) {
+    if (n > 2) {
         ans -= ans / n;
     }
     return ans;

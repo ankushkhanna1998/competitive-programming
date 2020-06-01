@@ -1,14 +1,14 @@
 template <typename T>
 inline vector<T> factorize(T n) {
     vector<T> res(__builtin_ctzll(n), 2);
-    n >>= res.size();
+    n >>= (int) res.size();
     for (T i = 3; i * i <= n; i += 2) {
         while (!(n % i)) {
             n /= i;
             res.push_back(i);
         }
     }
-    if (n > static_cast<T>(2)) {
+    if (n > 2) {
         res.push_back(n);
     }
     return res;

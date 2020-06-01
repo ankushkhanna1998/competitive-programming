@@ -3,7 +3,7 @@ class sparse_table {
 
 private:
 
-    const T DEFAULT = static_cast<T>(0L); // some "don't care" value
+    const T DEFAULT = static_cast<T>(0); // some "don't care" value
 
     int n;
 
@@ -17,7 +17,7 @@ private:
 public:
 
     template <typename A>
-    inline sparse_table(const vector<A> _a) : n(static_cast<int>(_a.size())) {
+    inline sparse_table(const vector<A> _a) : n((int) _a.size()) {
         a.assign(_a.begin(), _a.end());
         st_a.resize(32 - __builtin_clz(n));
         st_b.resize(st_a.size());

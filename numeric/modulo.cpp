@@ -1,45 +1,45 @@
-const long MOD = static_cast<long>(1e9 + 7.0);
+const int64_t MOD = static_cast<int64_t>(1e9 + 7);
 
-inline long add(long a, long b, const long M = MOD) {
+inline int64_t add(int64_t a, int64_t b, const int64_t M = MOD) {
     if ((a += b) >= M) {
         a -= M;
     }
     return a;
 }
 
-inline long sub(long a, long b, const long M = MOD) {
-    if ((a -= b) < 0L) {
+inline int64_t sub(int64_t a, int64_t b, const int64_t M = MOD) {
+    if ((a -= b) < 0) {
         a += M;
     }
     return a;
 }
 
-inline long mul(long a, long b, const long M = MOD) {
+inline int64_t mul(int64_t a, int64_t b, const int64_t M = MOD) {
     return a * b % M;
 }
 
-inline long power(long a, long b, const long M = MOD) {
-    assert(b >= 0L);
-    long ans = 1L;
+inline int64_t power(int64_t a, int64_t b, const int64_t M = MOD) {
+    assert(b >= 0);
+    int64_t ans = 1;
     while (b) {
-        if (b & 1L) {
+        if (b & 1) {
             ans = mul(ans, a, M);
         }
         a = mul(a, a, M);
-        b >>= 1L;
+        b >>= 1;
     }
     return ans;
 }
 
-inline long inverse(long a, const long M = MOD) {
-    long b = M, u = 0L, v = 1L;
+inline int64_t inverse(int64_t a, const int64_t M = MOD) {
+    int64_t b = M, u = 0, v = 1;
     while (a) {
-        long t = b / a;
+        int64_t t = b / a;
         b -= t * a; swap(a, b);
         u -= t * v; swap(u, v);
     }
-    assert(b == 1L);
-    if (u < 0L) {
+    assert(b == 1);
+    if (u < 0) {
         u += M;
     }
     return u;

@@ -12,14 +12,14 @@ private:
     }
 
     inline void propagate(int v, int from, int to) {
-        if (lazy[v] != static_cast<T>(0L)) {
+        if (lazy[v] != 0) {
             tree[v] += lazy[v] * (to - from + 1);
             if (from != to) {
                 int tree_left = v << 1 | 1, tree_right = tree_left + 1;
                 lazy[tree_left] += lazy[v];
                 lazy[tree_right] += lazy[v];
             }
-            lazy[v] = static_cast<T>(0L);
+            lazy[v] = 0;
         }
     }
 
@@ -46,7 +46,7 @@ private:
     inline T query(int v, int from, int to, int l, int r) {
         propagate(v, from, to);
         if (from > to || from > r || to < l) {
-            return static_cast<T>(0L); // some "don't care" value
+            return static_cast<T>(0); // some "don't care" value
         }
         if (from >= l && to <= r) {
             return tree[v];
@@ -61,7 +61,7 @@ private:
 public:
 
     template <typename A>
-    inline segment_tree(const vector<A> a) : n(static_cast<int>(a.size())) {
+    inline segment_tree(const vector<A> a) : n((int) a.size()) {
         tree.resize(n << 2);
         lazy.resize(n << 2);
 

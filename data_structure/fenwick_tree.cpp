@@ -23,7 +23,7 @@ public:
     }
 
     inline T sum(int x) const {
-        T res = static_cast<T>(0L);
+        T res = 0;
         while (x >= 0) {
             res += fenw[x];
             x = (x & (x + 1)) - 1;
