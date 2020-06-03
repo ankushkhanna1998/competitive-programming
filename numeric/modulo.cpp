@@ -39,8 +39,5 @@ inline int64_t inverse(int64_t a, const int64_t M = MOD) {
         u -= t * v; swap(u, v);
     }
     assert(b == 1);
-    if (u < 0) {
-        u += M;
-    }
-    return u;
+    return sub(u, 0, M);
 }
