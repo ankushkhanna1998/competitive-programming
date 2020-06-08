@@ -36,11 +36,7 @@
 
     template <size_t N>
     inline string to_string(bitset<N> v) {
-        string res;
-        for (size_t i = 0; i < N; i++) {
-            res += static_cast<char>(v[i]);
-        }
-        return res;
+        return v.to_string();
     }
 
     template <typename A>
