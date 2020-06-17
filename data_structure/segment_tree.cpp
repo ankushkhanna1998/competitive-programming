@@ -60,10 +60,13 @@ private:
 
 public:
 
-    template <typename A>
-    inline segment_tree(const vector<A> a) : n((int) a.size()) {
+    inline segment_tree(int _n) : n(_n) {
         tree.resize(n << 2);
         lazy.resize(n << 2);
+    }
+
+    template <typename A>
+    inline segment_tree(const vector<A> a) : segment_tree((int) a.size()) {
 
         function<void(int, int, int)> build = [&](int v, int l, int r) -> void {
             if (l == r) {
