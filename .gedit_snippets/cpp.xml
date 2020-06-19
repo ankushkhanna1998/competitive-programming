@@ -1,0 +1,598 @@
+<?xml version='1.0' encoding='utf-8'?>
+<snippets language="cpp">
+  <snippet override="cpp-beginend">
+    <text><![CDATA[${1:v}.begin(), ${1:v}.end()]]></text>
+    <description>beginend</description>
+    <tag>all</tag>
+  </snippet>
+  <snippet override="cpp-do">
+    <text><![CDATA[do {
+	$0
+} while (${1:condition});]]></text>
+    <description>do .. while</description>
+    <tag>do</tag>
+  </snippet>
+  <snippet override="cpp-for">
+    <text><![CDATA[for (${1:int} ${2:i} = ${3:0}; ${2:i} < ${4:n}; ${2:i}${5:++}) {
+	$0
+}]]></text>
+    <description>for loop</description>
+    <tag>for</tag>
+  </snippet>
+  <snippet override="cpp-if">
+    <text><![CDATA[if (${1:condition}) {
+	$0
+}]]></text>
+    <description>if ..</description>
+    <tag>if</tag>
+  </snippet>
+  <snippet override="cpp-inc">
+    <text><![CDATA[#include "${1:file}"]]></text>
+    <description>#include ".."</description>
+    <tag>Inc</tag>
+  </snippet>
+  <snippet override="cpp-endif">
+    <text><![CDATA[#endif]]></text>
+    <accelerator><![CDATA[<Primary><Alt>period]]></accelerator>
+    <description>#endif</description>
+  </snippet>
+  <snippet override="cpp-Inc">
+    <text><![CDATA[#include <${1:file}>]]></text>
+    <description>#include &lt;..&gt;</description>
+    <tag>inc</tag>
+  </snippet>
+  <snippet override="cpp-main">
+    <text><![CDATA[int main(int argc, char **argv) {
+	$0
+	return 0;
+}]]></text>
+    <description>main</description>
+    <tag>main</tag>
+  </snippet>
+  <snippet override="cpp-namespace">
+    <text><![CDATA[namespace ${1:ns} {
+	$0
+}]]></text>
+    <description>namespace ..</description>
+    <tag>ns</tag>
+  </snippet>
+  <snippet override="cpp-map">
+    <text><![CDATA[map<${1:key}, ${2:value}> ${3:m};]]></text>
+    <description>std::map</description>
+    <tag>map</tag>
+  </snippet>
+  <snippet override="cpp-vector">
+    <text><![CDATA[vector<${1:type}> ${2:v};]]></text>
+    <description>std::vector</description>
+    <tag>vv</tag>
+  </snippet>
+  <snippet override="cpp-struct">
+    <text><![CDATA[struct ${1:name} {
+	${0:/* data */}
+};]]></text>
+    <description>struct ..</description>
+    <tag>st</tag>
+  </snippet>
+  <snippet override="cpp-template">
+    <text><![CDATA[template <typename ${1:T}>]]></text>
+    <description>template &lt;typename ..&gt;</description>
+    <tag>tmpl</tag>
+  </snippet>
+  <snippet override="cpp-td">
+    <text><![CDATA[typedef ${1:type} ${2:new_type};]]></text>
+    <tag>td</tag>
+    <description>typedef</description>
+  </snippet>
+  <snippet override="cpp-while">
+    <text><![CDATA[while (${1:condition}) {
+	$0
+}]]></text>
+    <tag>whi</tag>
+    <description>while</description>
+  </snippet>
+  <snippet override="cpp-readfile">
+    <text><![CDATA[ifstream fin("${1:filename}", ios_base::ate);
+string ${2:str};
+if (fin.good()) {
+    int len = fin.tellg();
+    fin.seekg(0, ios_base::beg);
+    char *buf = new char[len];
+    fin.read(buf, len);
+    ${2:str}.assign(buf);
+    delete[] buf;
+    fin.close();
+}]]></text>
+    <description>Read File Into String</description>
+    <tag>readfile</tag>
+  </snippet>
+  <snippet>
+    <tag>code</tag>
+    <text><![CDATA[#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    int tt;
+    cin >> tt;
+    while (tt--) {
+        int n;
+        cin >> n;
+        $0
+    }
+    return 0;
+}
+]]></text>
+    <description>Competitive Code</description>
+  </snippet>
+  <snippet>
+    <tag>elif</tag>
+    <text><![CDATA[else if (${1:condition}) {
+	$0
+}]]></text>
+    <description>else if</description>
+  </snippet>
+  <snippet override="cpp-gpl">
+    <text><![CDATA[/**
+ * ${1:[$GEDIT_CURRENT_DOCUMENT_NAME,<filename>]}
+ * This file is part of ${2:<program name>}
+ *
+ * Copyright (C) $<3: import datetime; return str(datetime.date.today().year)> - $<4:
+import pwd, os
+try:
+  return pwd.getpwuid(os.getuid()).pw_gecos.split(',')[0]
+except KeyError:
+  return '<author\>' >
+ *
+ * ${2} is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * ${2} is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ${2}. If not, see <http://www.gnu.org/licenses/>.
+**/
+$0]]></text>
+    <tag>gpl</tag>
+    <description>GPL License</description>
+  </snippet>
+  <snippet override="cpp-lgpl">
+    <text><![CDATA[/**
+ * ${1:[$GEDIT_CURRENT_DOCUMENT_NAME,<filename>]}
+ * This file is part of ${2:<library name>}
+ *
+ * Copyright (C) $<3: import datetime; return str(datetime.date.today().year)> - $<4:
+import pwd, os
+try:
+  return pwd.getpwuid(os.getuid()).pw_gecos.split(',')[0]
+except KeyError:
+  return '<author\>' >
+ *
+ * ${2} is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * ${2} is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ${2}. If not, see <http://www.gnu.org/licenses/>.
+**/
+$0]]></text>
+    <tag>lgpl</tag>
+    <description>LGPL License</description>
+  </snippet>
+  <snippet>
+    <tag>modulo</tag>
+    <text><![CDATA[const int64_t MOD = static_cast<int64_t>(1e9 + 7);
+
+inline int64_t add(int64_t a, int64_t b, const int64_t M = MOD) {
+    if ((a += b) >= M) {
+        a -= M;
+    }
+    return a;
+}
+
+inline int64_t sub(int64_t a, int64_t b, const int64_t M = MOD) {
+    if ((a -= b) < 0) {
+        a += M;
+    }
+    return a;
+}
+
+inline int64_t mul(int64_t a, int64_t b, const int64_t M = MOD) {
+    return a * b % M;
+}
+
+inline int64_t power(int64_t a, int64_t b, const int64_t M = MOD) {
+    assert(b >= 0);
+    int64_t ans = 1;
+    while (b) {
+        if (b & 1) {
+            ans = mul(ans, a, M);
+        }
+        a = mul(a, a, M);
+        b >>= 1;
+    }
+    return ans;
+}
+
+inline int64_t inverse(int64_t a, const int64_t M = MOD) {
+    int64_t b = M, u = 0, v = 1;
+    while (a) {
+        int64_t t = b / a;
+        b -= t * a; swap(a, b);
+        u -= t * v; swap(u, v);
+    }
+    assert(b == 1);
+    return sub(u, 0, M);
+}]]></text>
+    <description>Modular Arithmetic</description>
+  </snippet>
+  <snippet>
+    <tag>debug</tag>
+    <text><![CDATA[#ifdef LOCAL
+    #include "debug.hpp"
+#else
+    #define debug(...)
+#endif]]></text>
+    <description>Debug</description>
+  </snippet>
+  <snippet>
+    <tag>dsu</tag>
+    <text><![CDATA[class dsu {
+public:
+
+    int n;
+
+    vector<int> p, sz;
+
+    inline dsu(int _n) : n(_n), p(_n), sz(_n, 1) {
+        iota(p.begin(), p.end(), 0);
+    }
+
+    inline int get(int x) {
+        return (x == p[x] ? x : (p[x] = get(p[x])));
+    }
+
+    inline int size(int x) {
+        return sz[get(x)];
+    }
+
+    inline void unite(int x, int y) {
+        if ((x = get(x)) != (y = get(y))) {
+            if (sz[y] > sz[x]) {
+                swap(x, y);
+            }
+            p[y] = x;
+            sz[x] += sz[y];
+        }
+    }
+
+};]]></text>
+    <description>Disjoint Set Union</description>
+  </snippet>
+  <snippet>
+    <tag>cl</tag>
+    <text><![CDATA[class ${1:name} {
+public:
+    ${0:/* data */}
+};]]></text>
+    <description>class ..</description>
+  </snippet>
+  <snippet>
+    <tag>fenwick</tag>
+    <text><![CDATA[template <typename T>
+class fenwick_tree {
+public:
+
+    int n;
+
+    vector<T> fenw;
+
+    inline fenwick_tree(int _n) : n(_n), fenw(_n) {}
+
+    template <typename A>
+    inline fenwick_tree(const vector<A> a) : fenwick_tree((int) a.size()) {
+        for (int i = 0; i < n; i++) {
+            add(i, a[i]);
+        }
+    }
+
+    inline void add(int x, T delta) {
+        while (x < n) {
+            fenw[x] += delta;
+            x |= x + 1;
+        }
+    }
+
+    inline T sum(int x) const {
+        T res = 0;
+        while (x >= 0) {
+            res += fenw[x];
+            x = (x & (x + 1)) - 1;
+        }
+        return res;
+    }
+
+    inline T sum(int l, int r) const {
+        return sum(r) - sum(l - 1);
+    }
+
+};]]></text>
+    <description>Fenwick Tree</description>
+  </snippet>
+  <snippet>
+    <tag>phi</tag>
+    <text><![CDATA[inline int64_t phi(int64_t n) {
+    int64_t ans = n;
+    n >>= __builtin_ctzll(n);
+    if (ans != n) {
+        ans >>= 1;
+    }
+    for (int64_t i = 3; i * i <= n; i += 2) {
+        if (!(n % i)) {
+            ans -= ans / i;
+            while (!(n % i)) {
+                n /= i;
+            }
+        }
+    }
+    if (n > 2) {
+        ans -= ans / n;
+    }
+    return ans;
+}
+
+inline vector<int> phi_all(int n) {
+    vector<int> phi(n + 1);
+    iota(phi.begin(), phi.end(), 0);
+    for (int i = 2; i <= n; i++) {
+        if (phi[i] == i) {
+            for (int j = i; j <= n; j += i) {
+                phi[j] -= phi[j] / i;
+            }
+        }
+    }
+    return phi;
+}]]></text>
+    <description>Euler's Totient Function</description>
+  </snippet>
+  <snippet>
+    <tag>sieve</tag>
+    <text><![CDATA[inline vector<int> sieve(int n) {
+    vector<bool> prime(n + 1, true);
+    for (int i = 2; i * i <= n; i++) {
+        if (prime[i]) {
+            for (int j = i * i; j <= n; j += i) {
+                prime[j] = false;
+            }
+        }
+    }
+    vector<int> res;
+    for (int i = 2; i <= n; i++) {
+        if (prime[i]) {
+            res.push_back(i);
+        }
+    }
+    return res;
+}]]></text>
+    <description>Prime Sieve</description>
+  </snippet>
+  <snippet>
+    <tag>factorize</tag>
+    <text><![CDATA[template <typename T>
+inline vector<T> factorize(T n) {
+    vector<T> res(__builtin_ctzll(n), 2);
+    n >>= (int) res.size();
+    for (T i = 3; i * i <= n; i += 2) {
+        while (!(n % i)) {
+            n /= i;
+            res.push_back(i);
+        }
+    }
+    if (n > 2) {
+        res.push_back(n);
+    }
+    return res;
+}
+
+class factorizer {
+public:
+
+    const int MAXN;
+
+    vector<int> spf;
+
+    inline factorizer(int _n) : MAXN(_n), spf(_n + 1) {
+        iota(spf.begin(), spf.end(), 0);
+        for (int i = 4; i <= MAXN; i += 2) {
+            spf[i] = 2;
+        }
+        for (int i = 3; i * i <= MAXN; i++) {
+            if (spf[i] == i) {
+                for (int j = i * i; j <= MAXN; j += i) {
+                    if (spf[j] == j) {
+                        spf[j] = i;
+                    }
+                }
+            }
+        }
+    }
+
+    inline vector<int> factorize(int n) const {
+        assert(n > 0 && n <= MAXN);
+        vector<int> res;
+        while (n > 1) {
+            res.push_back(spf[n]);
+            n /= spf[n];
+        }
+        return res;
+    }
+
+};]]></text>
+    <description>Prime Factorization</description>
+  </snippet>
+  <snippet>
+    <tag>segtree</tag>
+    <text><![CDATA[template <typename T>
+class segment_tree {
+
+private:
+
+    int n;
+
+    vector<T> tree, lazy;
+
+    inline T unite(T u, T v) const {
+        return (u + v);
+    }
+
+    inline void propagate(int v, int from, int to) {
+        if (lazy[v] != 0) {
+            tree[v] += lazy[v] * (to - from + 1);
+            if (from != to) {
+                int tree_left = v << 1 | 1, tree_right = tree_left + 1;
+                lazy[tree_left] += lazy[v];
+                lazy[tree_right] += lazy[v];
+            }
+            lazy[v] = 0;
+        }
+    }
+
+    inline void update(int v, int from, int to, int l, int r, T delta) {
+        propagate(v, from, to);
+        if (from > to || from > r || to < l) {
+            return;
+        }
+        int tree_left = v << 1 | 1, tree_right = tree_left + 1;
+        if (from >= l && to <= r) {
+            tree[v] += delta * (to - from + 1);
+            if (from != to) {
+                lazy[tree_left] += delta;
+                lazy[tree_right] += delta;
+            }
+            return;
+        }
+        int coverage_mid = (from + to) >> 1;
+        update(tree_left, from, coverage_mid, l, r, delta);
+        update(tree_right, coverage_mid + 1, to, l, r, delta);
+        tree[v] = unite(tree[tree_left], tree[tree_right]);
+    }
+
+    inline T query(int v, int from, int to, int l, int r) {
+        propagate(v, from, to);
+        if (from > to || from > r || to < l) {
+            return static_cast<T>(0); // some "don't care" value
+        }
+        if (from >= l && to <= r) {
+            return tree[v];
+        }
+        int coverage_mid = (from + to) >> 1;
+        int tree_left = v << 1 | 1, tree_right = tree_left + 1;
+        T left_query = query(tree_left, from, coverage_mid, l, r);
+        T right_query = query(tree_right, coverage_mid + 1, to, l, r);
+        return unite(left_query, right_query);
+    }
+
+public:
+
+    inline segment_tree(int _n) : n(_n), tree(_n << 2), lazy(_n << 2) {}
+
+    template <typename A>
+    inline segment_tree(const vector<A> a) : segment_tree((int) a.size()) {
+
+        function<void(int, int, int)> build = [&](int v, int l, int r) -> void {
+            if (l == r) {
+                tree[v] = a[l];
+                return;
+            }
+            int array_mid = (l + r) >> 1;
+            int tree_left = v << 1 | 1, tree_right = tree_left + 1;
+            build(tree_left, l, array_mid);
+            build(tree_right, array_mid + 1, r);
+            tree[v] = unite(tree[tree_left], tree[tree_right]);
+        };
+
+        build(0, 0, n - 1);
+    }
+
+    inline void update(int l, int r, T delta) {
+        update(0, 0, n - 1, l, r, delta);
+    }
+
+    inline T query(int l, int r) {
+        return query(0, 0, n - 1, l, r);
+    }
+
+};]]></text>
+    <description>Segment Tree</description>
+  </snippet>
+  <snippet>
+    <tag>sparse</tag>
+    <text><![CDATA[template <typename T>
+class sparse_table {
+
+private:
+
+    const T DEFAULT = static_cast<T>(0); // some "don't care" value
+
+    int n;
+
+    vector<T> a;
+    vector<vector<T>> st_a, st_b;
+
+    inline T unite(T a, T b) const {
+        return (a + b);
+    }
+
+public:
+
+    template <typename A>
+    inline sparse_table(const vector<A> _a) : n((int) _a.size()) {
+        a.assign(_a.begin(), _a.end());
+        st_a.resize(32 - __builtin_clz(n));
+        st_b.resize(st_a.size());
+        for (int i = 0; i < (int) st_a.size(); i++) {
+            int ones = (1 << i) - 1;
+            T now = DEFAULT;
+            st_a[i].resize(n);
+            for (int j = 0; j < n; j++) {
+                now = st_a[i][j] = unite(now, a[j]);
+                if ((j & ones) == ones) {
+                    now = DEFAULT;
+                }
+            }
+            now = DEFAULT;
+            st_b[i].resize(n);
+            for (int j = n - 1; j >= 0; j--) {
+                now = st_b[i][j] = unite(now, a[j]);
+                if ((j & ones) == 0) {
+                    now = DEFAULT;
+                }
+            }
+        }
+    }
+
+    inline T query(int from, int to) const {
+        if (from == to) {
+            return unite(a[from], DEFAULT);
+        }
+        int lg = 32 - __builtin_clz(from ^ to) - 1;
+        return unite(st_b[lg][from], st_a[lg][to]);
+    }
+
+};]]></text>
+    <description>Sparse Table</description>
+  </snippet>
+</snippets>

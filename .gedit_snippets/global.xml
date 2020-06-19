@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<snippets>
+  <snippet>
+    <tag>{</tag>
+    <text><![CDATA[{
+    $0
+}]]></text>
+    <description>Brace</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA["${1:$GEDIT_SELECTED_TEXT}"]]></text>
+    <description>Wrap .. ""</description>
+    <accelerator><![CDATA[<Primary><Shift>quotedbl]]></accelerator>
+  </snippet>
+  <snippet>
+    <text><![CDATA[(${1:$GEDIT_SELECTED_TEXT})]]></text>
+    <description>Wrap .. ()</description>
+    <accelerator><![CDATA[<Primary><Shift>parenleft]]></accelerator>
+  </snippet>
+  <snippet>
+    <text><![CDATA[{${1:$GEDIT_SELECTED_TEXT}}]]></text>
+    <description>Wrap .. {}</description>
+    <accelerator><![CDATA[<Primary><Shift>braceleft]]></accelerator>
+  </snippet>
+</snippets>
