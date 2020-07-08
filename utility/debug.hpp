@@ -2,6 +2,10 @@
 
     #define _DEBUG_HPP
 
+    inline string to_string(const char c) {
+        return string(1, c);
+    }
+
     template <typename A, typename B>
     inline string to_string(pair<A, B>);
 
