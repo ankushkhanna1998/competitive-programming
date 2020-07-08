@@ -2,10 +2,6 @@
 
     #define _DEBUG_HPP
 
-    inline string to_string(const char c) {
-        return string(1, c);
-    }
-
     template <typename A, typename B>
     inline string to_string(pair<A, B>);
 
@@ -25,6 +21,10 @@
 
     inline string to_string(bool b) {
         return (b ? "true" : "false");
+    }
+
+    inline string to_string(const char c) {
+        return to_string(string(1, c));
     }
 
     inline string to_string(vector<bool> v) {
