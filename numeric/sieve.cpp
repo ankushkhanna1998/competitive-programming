@@ -1,4 +1,4 @@
-inline vector<int> sieve(int n) {
+inline vector<int> sieve(const int n) {
     vector<bool> prime(n + 1, true);
     for (int i = 2; i * i <= n; i++) {
         if (prime[i]) {

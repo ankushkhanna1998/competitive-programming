@@ -7,7 +7,7 @@ private:
 
     vector<T> tree, lazy;
 
-    inline T unite(T u, T v) const {
+    inline T unite(const T u, const T v) const {
         return (u + v);
     }
 
@@ -23,7 +23,7 @@ private:
         }
     }
 
-    inline void update(int v, int from, int to, int l, int r, T delta) {
+    inline void update(int v, int from, int to, int l, int r, const T delta) {
         propagate(v, from, to);
         if (from > to || from > r || to < l) {
             return;
@@ -60,7 +60,7 @@ private:
 
 public:
 
-    inline segment_tree(int _n) : n(_n), tree(_n << 2), lazy(_n << 2) {}
+    inline segment_tree(const int _n) : n(_n), tree(_n << 2), lazy(_n << 2) {}
 
     template <typename A>
     inline segment_tree(const vector<A> a) : segment_tree((int) a.size()) {
@@ -80,11 +80,11 @@ public:
         build(0, 0, n - 1);
     }
 
-    inline void update(int l, int r, T delta) {
+    inline void update(const int l, const int r, const T delta) {
         update(0, 0, n - 1, l, r, delta);
     }
 
-    inline T query(int l, int r) {
+    inline T query(const int l, const int r) {
         return query(0, 0, n - 1, l, r);
     }
 

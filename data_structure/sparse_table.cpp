@@ -10,7 +10,7 @@ private:
     vector<T> a;
     vector<vector<T>> st_a, st_b;
 
-    inline T unite(T a, T b) const {
+    inline T unite(const T a, const T b) const {
         return (a + b);
     }
 
@@ -42,7 +42,7 @@ public:
         }
     }
 
-    inline T query(int from, int to) const {
+    inline T query(const int from, const int to) const {
         if (from == to) {
             return unite(a[from], DEFAULT);
         }

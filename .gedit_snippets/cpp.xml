@@ -196,21 +196,21 @@ $0]]></text>
     <tag>modulo</tag>
     <text><![CDATA[const int64_t MOD = static_cast<int64_t>(1e9 + 7);
 
-inline int64_t add(int64_t a, int64_t b, const int64_t M = MOD) {
+inline int64_t add(int64_t a, const int64_t b, const int64_t M = MOD) {
     if ((a += b) >= M) {
         a -= M;
     }
     return a;
 }
 
-inline int64_t sub(int64_t a, int64_t b, const int64_t M = MOD) {
+inline int64_t sub(int64_t a, const int64_t b, const int64_t M = MOD) {
     if ((a -= b) < 0) {
         a += M;
     }
     return a;
 }
 
-inline int64_t mul(int64_t a, int64_t b, const int64_t M = MOD) {
+inline int64_t mul(const int64_t a, const int64_t b, const int64_t M = MOD) {
     return a * b % M;
 }
 
@@ -257,15 +257,15 @@ public:
 
     vector<int> p, sz;
 
-    inline dsu(int _n) : n(_n), p(_n), sz(_n, 1) {
+    inline dsu(const int _n) : n(_n), p(_n), sz(_n, 1) {
         iota(p.begin(), p.end(), 0);
     }
 
-    inline int get(int x) {
+    inline int get(const int x) {
         return (x == p[x] ? x : (p[x] = get(p[x])));
     }
 
-    inline int size(int x) {
+    inline int size(const int x) {
         return sz[get(x)];
     }
 
@@ -300,7 +300,7 @@ public:
 
     vector<T> fenw;
 
-    inline fenwick_tree(int _n) : n(_n), fenw(_n) {}
+    inline fenwick_tree(const int _n) : n(_n), fenw(_n) {}
 
     template <typename A>
     inline fenwick_tree(const vector<A> a) : fenwick_tree((int) a.size()) {
@@ -309,7 +309,7 @@ public:
         }
     }
 
-    inline void add(int x, T delta) {
+    inline void add(int x, const T delta) {
         while (x < n) {
             fenw[x] += delta;
             x |= x + 1;
@@ -325,7 +325,7 @@ public:
         return res;
     }
 
-    inline T sum(int l, int r) const {
+    inline T sum(const int l, const int r) const {
         return sum(r) - sum(l - 1);
     }
 
@@ -354,7 +354,7 @@ public:
     return ans;
 }
 
-inline vector<int> phi_all(int n) {
+inline vector<int> phi_all(const int n) {
     vector<int> phi(n + 1);
     iota(phi.begin(), phi.end(), 0);
     for (int i = 2; i <= n; i++) {
@@ -370,7 +370,7 @@ inline vector<int> phi_all(int n) {
   </snippet>
   <snippet>
     <tag>sieve</tag>
-    <text><![CDATA[inline vector<int> sieve(int n) {
+    <text><![CDATA[inline vector<int> sieve(const int n) {
     vector<bool> prime(n + 1, true);
     for (int i = 2; i * i <= n; i++) {
         if (prime[i]) {
@@ -454,7 +454,7 @@ private:
 
     vector<T> tree, lazy;
 
-    inline T unite(T u, T v) const {
+    inline T unite(const T u, const T v) const {
         return (u + v);
     }
 
@@ -470,7 +470,7 @@ private:
         }
     }
 
-    inline void update(int v, int from, int to, int l, int r, T delta) {
+    inline void update(int v, int from, int to, int l, int r, const T delta) {
         propagate(v, from, to);
         if (from > to || from > r || to < l) {
             return;
@@ -507,7 +507,7 @@ private:
 
 public:
 
-    inline segment_tree(int _n) : n(_n), tree(_n << 2), lazy(_n << 2) {}
+    inline segment_tree(const int _n) : n(_n), tree(_n << 2), lazy(_n << 2) {}
 
     template <typename A>
     inline segment_tree(const vector<A> a) : segment_tree((int) a.size()) {
@@ -527,11 +527,11 @@ public:
         build(0, 0, n - 1);
     }
 
-    inline void update(int l, int r, T delta) {
+    inline void update(const int l, const int r, const T delta) {
         update(0, 0, n - 1, l, r, delta);
     }
 
-    inline T query(int l, int r) {
+    inline T query(const int l, const int r) {
         return query(0, 0, n - 1, l, r);
     }
 
@@ -552,7 +552,7 @@ private:
     vector<T> a;
     vector<vector<T>> st_a, st_b;
 
-    inline T unite(T a, T b) const {
+    inline T unite(const T a, const T b) const {
         return (a + b);
     }
 
@@ -584,7 +584,7 @@ public:
         }
     }
 
-    inline T query(int from, int to) const {
+    inline T query(const int from, const int to) const {
         if (from == to) {
             return unite(a[from], DEFAULT);
         }

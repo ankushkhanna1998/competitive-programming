@@ -18,7 +18,7 @@ inline int64_t phi(int64_t n) {
     return ans;
 }
 
-inline vector<int> phi_all(int n) {
+inline vector<int> phi_all(const int n) {
     vector<int> phi(n + 1);
     iota(phi.begin(), phi.end(), 0);
     for (int i = 2; i <= n; i++) {

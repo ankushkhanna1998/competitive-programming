@@ -6,7 +6,7 @@ public:
 
     vector<T> fenw;
 
-    inline fenwick_tree(int _n) : n(_n), fenw(_n) {}
+    inline fenwick_tree(const int _n) : n(_n), fenw(_n) {}
 
     template <typename A>
     inline fenwick_tree(const vector<A> a) : fenwick_tree((int) a.size()) {
@@ -15,7 +15,7 @@ public:
         }
     }
 
-    inline void add(int x, T delta) {
+    inline void add(int x, const T delta) {
         while (x < n) {
             fenw[x] += delta;
             x |= x + 1;
@@ -31,7 +31,7 @@ public:
         return res;
     }
 
-    inline T sum(int l, int r) const {
+    inline T sum(const int l, const int r) const {
         return sum(r) - sum(l - 1);
     }
 

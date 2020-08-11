@@ -3,15 +3,15 @@
     #define _DEBUG_HPP
 
     template <typename A, typename B>
-    inline string to_string(pair<A, B>);
+    inline string to_string(const pair<A, B>);
 
     template <typename A, typename B, typename C>
-    inline string to_string(tuple<A, B, C>);
+    inline string to_string(const tuple<A, B, C>);
 
     template <typename A, typename B, typename C, typename D>
-    inline string to_string(tuple<A, B, C, D>);
+    inline string to_string(const tuple<A, B, C, D>);
 
-    inline string to_string(const string &s) {
+    inline string to_string(const string s) {
         return "'" + s + "'";
     }
 
@@ -19,7 +19,7 @@
         return to_string((string) s);
     }
 
-    inline string to_string(bool b) {
+    inline string to_string(const bool b) {
         return (b ? "true" : "false");
     }
 
@@ -27,9 +27,9 @@
         return to_string(string(1, c));
     }
 
-    inline string to_string(vector<bool> v) {
-        string res("{");
-        if (v.size()) {
+    inline string to_string(const vector<bool> v) {
+        string res(1, '{');
+        if (!v.empty()) {
             res += to_string(v.front());
         }
         for (int i = 1; i < static_cast<int>(v.size()); i++) {
@@ -38,14 +38,14 @@
         return res + '}';
     }
 
-    template <size_t N>
-    inline string to_string(bitset<N> v) {
+    template <const size_t N>
+    inline string to_string(const bitset<N> v) {
         return v.to_string();
     }
 
     template <typename A>
-    inline string to_string(A v) {
-        string res("{");
+    inline string to_string(const A v) {
+        string res(1, '{');
         bool first = true;
         for (const auto &x : v) {
             if (!first) {
@@ -58,17 +58,17 @@
     }
 
     template <typename A, typename B>
-    inline string to_string(pair<A, B> p) {
+    inline string to_string(const pair<A, B> p) {
         return '(' + to_string(p.first) + ", " + to_string(p.second) + ')';
     }
 
     template <typename A, typename B, typename C>
-    inline string to_string(tuple<A, B, C> p) {
+    inline string to_string(const tuple<A, B, C> p) {
         return '(' + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ')';
     }
 
     template <typename A, typename B, typename C, typename D>
-    inline string to_string(tuple<A, B, C, D> p) {
+    inline string to_string(const tuple<A, B, C, D> p) {
         return '(' + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ", " + to_string(get<3>(p)) + ')';
     }
 
@@ -77,7 +77,7 @@
     }
 
     template <typename A, typename... B>
-    void debug_out(A a, B... b) {
+    void debug_out(const A a, const B... b) {
         cerr << ' ' << to_string(a);
         debug_out(b...);
     }
