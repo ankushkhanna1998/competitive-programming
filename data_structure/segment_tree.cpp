@@ -11,7 +11,7 @@ private:
         return (u + v);
     }
 
-    inline void propagate(int v, int from, int to) {
+    inline void propagate(const int v, const int from, const int to) {
         if (lazy[v] != 0) {
             tree[v] += lazy[v] * (to - from + 1);
             if (from != to) {
@@ -23,7 +23,8 @@ private:
         }
     }
 
-    inline void update(int v, int from, int to, int l, int r, const T delta) {
+    inline void update(const int v, const int from, const int to, const int l,
+                       const int r, const T delta) {
         propagate(v, from, to);
         if (from > to || from > r || to < l) {
             return;
@@ -43,7 +44,8 @@ private:
         tree[v] = unite(tree[tree_left], tree[tree_right]);
     }
 
-    inline T query(int v, int from, int to, int l, int r) {
+    inline T query(const int v, const int from, const int to, const int l,
+                   const int r) {
         propagate(v, from, to);
         if (from > to || from > r || to < l) {
             return static_cast<T>(0); // some "don't care" value
@@ -65,7 +67,8 @@ public:
     template <typename A>
     inline segment_tree(const vector<A> a) : segment_tree((int) a.size()) {
 
-        function<void(int, int, int)> build = [&](int v, int l, int r) -> void {
+        function<void(const int, const int, const int)> build =
+        [&](const int v, const int l, const int r) -> void {
             if (l == r) {
                 tree[v] = a[l];
                 return;

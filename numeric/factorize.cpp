@@ -21,7 +21,7 @@ public:
 
     vector<int> spf;
 
-    inline factorizer(int _n) : MAXN(_n), spf(_n + 1) {
+    inline factorizer(const int _n) : MAXN(_n), spf(_n + 1) {
         iota(spf.begin(), spf.end(), 0);
         for (int i = 4; i <= MAXN; i += 2) {
             spf[i] = 2;

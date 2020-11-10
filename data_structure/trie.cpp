@@ -17,7 +17,7 @@ private:
 
     vector<vertex> t;
 
-    inline int get_pos(const char c) {
+    inline int get_pos(const char c) const {
         return tolower(c) - 'a'; // modify if required
     }
 
@@ -40,7 +40,7 @@ public:
         t[v].leaf++;
     }
 
-    inline bool find(const string s) {
+    inline bool find(const string s) const {
         int v = 0;
         for (const char c : s) {
             int i = get_pos(c);
@@ -66,11 +66,11 @@ public:
         t[v].leaf--;
     }
 
-    inline bool empty() {
+    inline bool empty() const {
         return t[0].count == 0;
     }
 
-    inline int size() {
+    inline int size() const {
         return t[0].count;
     }
 
