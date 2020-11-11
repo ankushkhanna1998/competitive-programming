@@ -91,18 +91,18 @@
     <description>while</description>
   </snippet>
   <snippet override="cpp-readfile">
-    <text><![CDATA[ifstream fin("${1:filename}", ios_base::ate);
-string ${2:str};
+    <text><![CDATA[std::ifstream fin("${1:filename}", std::ios_base::ate);
+std::string ${2:content};
 if (fin.good()) {
-    int len = fin.tellg();
-    fin.seekg(0, ios_base::beg);
-    char *buf = new char[len];
-    fin.read(buf, len);
-    ${2:str}.assign(buf);
-    delete[] buf;
+    const int length = fin.tellg();
+    fin.seekg(0, std::ios_base::beg);
+    char *buffer = new char[length];
+    fin.read(buffer, length);
+    ${2:content}.assign(buffer);
+    delete[] buffer;
     fin.close();
 }]]></text>
-    <description>Read File Into String</description>
+    <description>Read File into String</description>
     <tag>readfile</tag>
   </snippet>
   <snippet>
