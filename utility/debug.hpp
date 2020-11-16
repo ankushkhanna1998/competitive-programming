@@ -32,7 +32,7 @@
         if (!v.empty()) {
             res += to_string(v.front());
         }
-        for (int i = 1; i < static_cast<int>(v.size()); i++) {
+        for (size_t i = 1; i < v.size(); i++) {
             res += ", " + to_string(v[i]);
         }
         return res + '}';
