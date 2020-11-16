@@ -1,11 +1,11 @@
 class dsu {
 public:
 
-    int n;
+    int n, components;
 
     vector<int> p, sz;
 
-    inline dsu(const int _n) : n(_n), p(_n), sz(_n, 1) {
+    inline dsu(const int _n) : n(_n), components(_n), p(_n), sz(_n, 1) {
         iota(p.begin(), p.end(), 0);
     }
 
@@ -24,6 +24,7 @@ public:
             }
             p[y] = x;
             sz[x] += sz[y];
+            components--;
         }
     }
 
