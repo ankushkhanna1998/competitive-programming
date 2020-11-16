@@ -77,7 +77,7 @@ public:
     template <typename A, typename B>
     inline cut_points_edges(const vector<vector<pair<A, B>>> &_g,
                             const bool keep_sorted = false) {
-        vector<vector<int>> g((int) _g.size());
+        vector<vector<int>> g(_g.size());
         for (int u = 0; u < (int) g.size(); u++) {
             for (const pair<A, B> &edge : _g[u]) {
                 g[u].push_back(static_cast<int>(edge.first));

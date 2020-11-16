@@ -42,7 +42,7 @@ int main() {
         if (a != b) {
             cout << "\n  Me: " << a;
             cout << "Them: " << b << "\nCounter Case:\n\n";
-            if (system("cat in.txt")) {
+            if (system("cat in.txt") != 0) {
                 cerr << "Unexpected Error at line " << __LINE__ << endl;
                 exit(0);
             }

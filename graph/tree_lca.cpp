@@ -36,7 +36,7 @@ public:
     template <typename A>
     inline tree_lca(const vector<vector<A>> &_g, const int root = 0)
                     : tree_lca((int) _g.size()) {
-        vector<vector<pair<int, int>>> g((int) _g.size());
+        vector<vector<pair<int, int>>> g(_g.size());
         for (int u = 0; u < (int) g.size(); u++) {
             for (const A v : _g[u]) {
                 g[u].emplace_back(static_cast<int>(v), 1);
