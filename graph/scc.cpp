@@ -61,7 +61,6 @@ public:
 
         clean(visited);
         clean(component);
-        clean(g_rev);
     }
 
     template <typename A, typename B>
