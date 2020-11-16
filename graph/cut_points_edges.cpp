@@ -83,7 +83,7 @@ public:
                 g[u].push_back(static_cast<int>(edge.first));
             }
         }
-        cut_points_edges(g, keep_sorted);
+        *this = cut_points_edges(g, keep_sorted);
     }
 
 };
