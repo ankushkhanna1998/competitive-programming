@@ -4,12 +4,13 @@ private:
 
     int max_height, time_elapsed;
 
-    vector<int> in_time, out_time;
+    vector<int> in_time, out_time, subtree_size;
     vector<vector<int>> parent;
     vector<vector<int64_t>> dist;
 
     inline tree_lca(const int n) : max_height((int) ceil(log2(n))),
-                                   time_elapsed(0), in_time(n), out_time(n),
+                                   time_elapsed(0), in_time(n),
+                                   out_time(n), subtree_size(n),
                                    parent(n, vector<int>(1 + max_height)),
                                    dist(n, vector<int64_t>(1 + max_height)) {}
 
@@ -17,6 +18,7 @@ private:
     void dfs(const vector<vector<pair<A, B>>> &g, const int u, const int p) {
         in_time[u] = ++time_elapsed;
         parent[u][0] = p;
+        subtree_size[u] = 1;
         for (int i = 1; i <= max_height; i++) {
             parent[u][i] = parent[parent[u][i - 1]][i - 1];
             dist[u][i] = dist[u][i - 1] + dist[parent[u][i - 1]][i - 1];
@@ -27,6 +29,7 @@ private:
             }
             dist[edge.first][0] = static_cast<int64_t>(edge.second);
             dfs(g, edge.first, u);
+            subtree_size[u] += subtree_size[edge.first];
         }
         out_time[u] = ++time_elapsed;
     }
@@ -73,6 +76,10 @@ public:
     inline int64_t distance(const int u, const int v) const {
         return (dist[u][max_height] + dist[v][max_height]
                 - (dist[lca(u, v)][max_height] << 1));
+    }
+
+    inline int size(const int u) const {
+        return subtree_size[u];
     }
 
 };
