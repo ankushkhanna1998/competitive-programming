@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.stream.Stream;
 
-public class Main {
+public final class Main {
 
     public static void main(final String[] args) throws IOException {
         final IOConsole console = new IOConsole();
