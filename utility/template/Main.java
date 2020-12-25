@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        IOConsole console = new IOConsole();
+    public static void main(final String[] args) throws IOException {
+        final IOConsole console = new IOConsole();
         int tt = console.nextInt();
         while (tt-- > 0) {
             // TODO
@@ -54,7 +54,7 @@ final class IOConsole {
 
     public final String[] nextStrings() throws IOException {
         ensureTokens();
-        String[] tokens = new String[tokenizer.countTokens()];
+        final String[] tokens = new String[tokenizer.countTokens()];
         for (int i = 0; i < tokens.length; i++) {
             tokens[i] = tokenizer.nextToken();
         }
@@ -81,11 +81,11 @@ final class IOConsole {
         output.println();
     }
 
-    public final void println(Object object) {
+    public final void println(final Object object) {
         output.println(object);
     }
 
-    public final void print(Object object) {
+    public final void print(final Object object) {
         output.print(object);
     }
 
@@ -93,7 +93,7 @@ final class IOConsole {
         output.flush();
     }
 
-    public final void assertion(boolean expression) {
+    public final void assertion(final boolean expression) {
         if (!expression) {
             throw new AssertionError();
         }
