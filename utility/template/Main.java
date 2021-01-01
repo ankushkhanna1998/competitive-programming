@@ -4,6 +4,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public final class Main {
@@ -65,16 +68,28 @@ final class IOConsole {
         return Arrays.stream(nextStrings());
     }
 
+    public final IntStream nextIntStream() throws IOException {
+        return nextStream().mapToInt(Integer::parseInt);
+    }
+
+    public final LongStream nextLongStream() throws IOException {
+        return nextStream().mapToLong(Long::parseLong);
+    }
+
+    public final DoubleStream nextDoubleStream() throws IOException {
+        return nextStream().mapToDouble(Double::parseDouble);
+    }
+
     public final int[] nextInts() throws IOException {
-        return nextStream().mapToInt(Integer::parseInt).toArray();
+        return nextIntStream().toArray();
     }
 
     public final long[] nextLongs() throws IOException {
-        return nextStream().mapToLong(Long::parseLong).toArray();
+        return nextLongStream().toArray();
     }
 
     public final double[] nextDoubles() throws IOException {
-        return nextStream().mapToDouble(Double::parseDouble).toArray();
+        return nextDoubleStream().toArray();
     }
 
     public final void println() {
