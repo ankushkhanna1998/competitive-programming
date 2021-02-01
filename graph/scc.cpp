@@ -41,7 +41,7 @@ public:
             }
         }
         visited.assign(g.size(), false);
-        vector<int> order(component.rbegin(), component.rend());
+        const vector<int> order(component.rbegin(), component.rend());
         for (const int i : order) {
             if (!visited[i]) {
                 component.clear();
