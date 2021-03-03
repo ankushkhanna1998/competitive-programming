@@ -781,6 +781,18 @@ public:
                 - (dist[lca(u, v)][max_height] << 1));
     }
 
+    inline int kth_ancestor(int u, int k) const {
+        int i = 0;
+        while (k > 0) {
+            if (k & 1) {
+                u = parent[u][i];
+            }
+            k >>= 1;
+            i++;
+        }
+        return u;
+    }
+
     inline int size(const int u) const {
         return subtree_size[u];
     }
