@@ -25,12 +25,17 @@ private class IOConsole {
 
     fun println() = output.println()
 
-    fun println(token: Any) {
-        output.println(token)
+    fun println(token: Any?) {
+        output.println(token ?: "null")
     }
 
-    fun print(token: Any) {
-        output.print(token)
+    fun print(token: Any?) {
+        output.print(token ?: "null")
+    }
+
+    fun debug(token: Any?) {
+        System.err.println("Debug: $token")
+        System.err.flush()
     }
 
     fun assertion(expression: Boolean) {

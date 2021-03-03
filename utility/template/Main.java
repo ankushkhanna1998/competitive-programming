@@ -104,14 +104,19 @@ final class IOConsole {
         output.print(object);
     }
 
-    public final void flush() {
-        output.flush();
+    public final void debug(final Object object) {
+        System.err.println("Debug: " + object);
+        System.err.flush();
     }
 
     public final void assertion(final boolean expression) {
         if (!expression) {
             throw new AssertionError();
         }
+    }
+
+    public final void flush() {
+        output.flush();
     }
 
     public final void close() throws IOException {
