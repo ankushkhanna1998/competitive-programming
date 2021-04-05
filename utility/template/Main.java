@@ -12,13 +12,14 @@ import java.util.stream.Stream;
 public final class Main {
 
     public static void main(final String[] args) throws IOException {
-        final IOConsole console = new IOConsole();
-        int tt = console.nextInt();
-        while (tt-- > 0) {
+        int testCases = console.nextInt();
+        while (testCases-- > 0) {
             // TODO
         }
         console.close();
     }
+
+    private static final IOConsole console = new IOConsole();
 }
 
 final class IOConsole {

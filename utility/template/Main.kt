@@ -3,12 +3,13 @@ import java.io.InputStreamReader
 import java.io.PrintWriter
 
 fun main(args: Array<String>) {
-    val console = IOConsole()
     repeat(console.readInt()) {
         // TODO
     }
     console.close()
 }
+
+private val console = IOConsole()
 
 private class IOConsole {
     private val input = BufferedReader(InputStreamReader(System.`in`))
