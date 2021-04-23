@@ -79,13 +79,10 @@ public:
     }
 
     inline int kth_ancestor(int u, int k) const {
-        int i = 0;
-        while (k > 0) {
+        for (int i = 0; k > 0; i++, k >>= 1) {
             if (k & 1) {
                 u = parent[u][i];
             }
-            k >>= 1;
-            i++;
         }
         return u;
     }
