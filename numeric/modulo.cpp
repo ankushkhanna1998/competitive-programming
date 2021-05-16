@@ -1,17 +1,11 @@
 const int64_t MOD = static_cast<int64_t>(1e9 + 7);
 
 inline int64_t add(int64_t a, const int64_t b, const int64_t M = MOD) {
-    if ((a += b) >= M) {
-        a -= M;
-    }
-    return a;
+    return ((a += b) >= M ? a - M : a);
 }
 
 inline int64_t sub(int64_t a, const int64_t b, const int64_t M = MOD) {
-    if ((a -= b) < 0) {
-        a += M;
-    }
-    return a;
+    return ((a -= b) < 0 ? a + M : a);
 }
 
 inline int64_t mul(const int64_t a, const int64_t b, const int64_t M = MOD) {
