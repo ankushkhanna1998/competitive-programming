@@ -1,6 +1,12 @@
 # Competitive Programming
 Contains Data Structures and Algorithms for Competitive Programming
 
+### Compiling ```C++``` Code
+
+```bash
+g++ -no-pie -fno-pie -fsanitize=address -fno-omit-frame-pointer -fno-common -Wall -Wextra -Wpedantic -g -pthread -D LOCAL -O3 -std=c++20 -o A A.cpp
+```
+
 ### Using ```gedit``` Snippets
 
 Copy the snippets to ```gedit```'s **snippets** directory. They'll be ready to be used then.  
