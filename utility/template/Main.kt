@@ -12,6 +12,7 @@ fun main(args: Array<String>) {
 private val console = IOConsole()
 
 private class IOConsole {
+
     private val input = BufferedReader(InputStreamReader(System.`in`))
     private val output = PrintWriter(System.out)
 

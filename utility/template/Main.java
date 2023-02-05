@@ -23,6 +23,7 @@ public final class Main {
 }
 
 final class IOConsole {
+
     private final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     private final PrintWriter output = new PrintWriter(System.out);
 
