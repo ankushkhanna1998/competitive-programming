@@ -2,7 +2,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
 
-fun main(args: Array<String>) {
+private fun main() {
     repeat(console.readInt()) {
         // TODO
     }
