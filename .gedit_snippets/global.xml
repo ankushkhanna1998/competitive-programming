@@ -3,7 +3,7 @@
   <snippet>
     <tag>{</tag>
     <text><![CDATA[{
-    $0
+  $0
 }]]></text>
     <description>Brace</description>
   </snippet>
@@ -25,13 +25,13 @@
   <snippet>
     <tag>auth</tag>
     <text><![CDATA[/**
- *     Author: ${1:ankushkhanna} (${2:Ankush Khanna})
- *    Created: $<
+ *   Author: ${1:ankushkhanna} (${2:Ankush Khanna})
+ *  Created: $<
 try:
-    from datetime import datetime
-    return datetime.now().strftime('%A, %d %B %Y, %I:%M:%S %p IST')
+  from datetime import datetime
+  return datetime.now().strftime('%A, %d %B %Y, %I:%M:%S %p IST')
 except BaseException:
-    return 'Right Now!'
+  return 'Just Now!'
 >
 **/]]></text>
     <description>Author</description>
