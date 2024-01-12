@@ -67,8 +67,8 @@ public:
   inline scc(const vector<vector<pair<A, B>>> &_g) {
     vector<vector<int>> g(_g.size());
     for (int u = 0; u < (int) g.size(); u++) {
-      for (const pair<A, B> &edge : _g[u]) {
-        g[u].push_back(static_cast<int>(edge.first));
+      for (const auto &[v, _] : _g[u]) {
+        g[u].push_back(static_cast<int>(v));
       }
     }
     *this = scc(g);

@@ -762,13 +762,13 @@ private:
       parent[u][i] = parent[parent[u][i - 1]][i - 1];
       dist[u][i] = dist[u][i - 1] + dist[parent[u][i - 1]][i - 1];
     }
-    for (const pair<A, B> &edge : g[u]) {
-      if (edge.first == p) {
+    for (const auto &[v, w] : g[u]) {
+      if (v == p) {
         continue;
       }
-      dist[edge.first][0] = static_cast<int64_t>(edge.second);
-      dfs(g, edge.first, u);
-      subtree_size[u] += subtree_size[edge.first];
+      dist[v][0] = static_cast<int64_t>(w);
+      dfs(g, v, u);
+      subtree_size[u] += subtree_size[v];
     }
     out_time[u] = ++time_elapsed;
   }
@@ -914,8 +914,8 @@ public:
                           const bool keep_sorted = false) {
     vector<vector<int>> g(_g.size());
     for (int u = 0; u < (int) g.size(); u++) {
-      for (const pair<A, B> &edge : _g[u]) {
-        g[u].push_back(static_cast<int>(edge.first));
+      for (const auto &[v, _] : _g[u]) {
+        g[u].push_back(static_cast<int>(v));
       }
     }
     *this = cut_points_edges(g, keep_sorted);
@@ -994,8 +994,8 @@ public:
   inline scc(const vector<vector<pair<A, B>>> &_g) {
     vector<vector<int>> g(_g.size());
     for (int u = 0; u < (int) g.size(); u++) {
-      for (const pair<A, B> &edge : _g[u]) {
-        g[u].push_back(static_cast<int>(edge.first));
+      for (const auto &[v, _] : _g[u]) {
+        g[u].push_back(static_cast<int>(v));
       }
     }
     *this = scc(g);

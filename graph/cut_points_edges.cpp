@@ -78,8 +78,8 @@ public:
                           const bool keep_sorted = false) {
     vector<vector<int>> g(_g.size());
     for (int u = 0; u < (int) g.size(); u++) {
-      for (const pair<A, B> &edge : _g[u]) {
-        g[u].push_back(static_cast<int>(edge.first));
+      for (const auto &[v, _] : _g[u]) {
+        g[u].push_back(static_cast<int>(v));
       }
     }
     *this = cut_points_edges(g, keep_sorted);

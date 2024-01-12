@@ -24,13 +24,13 @@ private:
       parent[u][i] = parent[parent[u][i - 1]][i - 1];
       dist[u][i] = dist[u][i - 1] + dist[parent[u][i - 1]][i - 1];
     }
-    for (const pair<A, B> &edge : g[u]) {
-      if (edge.first == p) {
+    for (const auto &[v, w] : g[u]) {
+      if (v == p) {
         continue;
       }
-      dist[edge.first][0] = static_cast<int64_t>(edge.second);
-      dfs(g, edge.first, u);
-      subtree_size[u] += subtree_size[edge.first];
+      dist[v][0] = static_cast<int64_t>(w);
+      dfs(g, v, u);
+      subtree_size[u] += subtree_size[v];
     }
     out_time[u] = ++time_elapsed;
   }
