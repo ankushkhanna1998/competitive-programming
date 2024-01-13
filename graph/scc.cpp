@@ -55,7 +55,7 @@ public:
             }
           }
         }
-        g_condensed.push_back(vector<int>());
+        g_condensed.emplace_back();
       }
     }
 
