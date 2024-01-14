@@ -9,6 +9,19 @@ private:
 
   vector<T> tree, lazy;
 
+  template <typename A>
+  inline void build(const vector<A> &a, const int v, const int l, const int r) {
+    if (l == r) {
+      tree[v] = static_cast<T>(a[l]);
+      return;
+    }
+    const int array_mid = (l + r) >> 1;
+    const int tree_left = v << 1 | 1, tree_right = tree_left + 1;
+    build(a, tree_left, l, array_mid);
+    build(a, tree_right, array_mid + 1, r);
+    tree[v] = unite(tree[tree_left], tree[tree_right]);
+  }
+
   inline void propagate(const int v, const int from, const int to) {
     if (lazy[v] != 0) {
       tree[v] += lazy[v] * (to - from + 1);
@@ -70,20 +83,7 @@ public:
   inline segment_tree(const vector<A> a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : segment_tree(a.size(), _unite, _default) {
-
-    const function<void(const int, const int, const int)> build = [&](const int v, const int l, const int r) -> void {
-      if (l == r) {
-        tree[v] = a[l];
-        return;
-      }
-      const int array_mid = (l + r) >> 1;
-      const int tree_left = v << 1 | 1, tree_right = tree_left + 1;
-      build(tree_left, l, array_mid);
-      build(tree_right, array_mid + 1, r);
-      tree[v] = unite(tree[tree_left], tree[tree_right]);
-    };
-
-    build(0, 0, n - 1);
+    build(a, 0, 0, (int) n - 1);
   }
 
   inline size_t size() const {
@@ -91,10 +91,10 @@ public:
   }
 
   inline void update(const int l, const int r, const T delta) {
-    update(0, 0, n - 1, l, r, delta);
+    update(0, 0, (int) n - 1, l, r, delta);
   }
 
   inline T query(const int l, const int r) {
-    return query(0, 0, n - 1, l, r);
+    return query(0, 0, (int) n - 1, l, r);
   }
 };

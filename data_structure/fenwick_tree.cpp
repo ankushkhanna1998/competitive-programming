@@ -27,8 +27,8 @@ public:
     }
   }
 
-  inline void update(size_t x, const T delta) {
-    while (x < n) {
+  inline void update(int x, const T delta) {
+    while (x < (int) n) {
       fenw[x] += delta;
       x |= x + 1;
     }
@@ -57,7 +57,7 @@ public:
 
   inline T find_by_order(const int pos) const {
     T res = DEFAULT;
-    int low = 0, high = n - 1;
+    int low = 0, high = (int) n - 1;
     while (low <= high) {
       const int mid = (low + high) >> 1;
       if (query(mid) >= pos + 1) {

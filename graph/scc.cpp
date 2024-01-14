@@ -8,7 +8,7 @@ private:
   inline scc(const int n) : visited(n), comp_id(n, -1), g_rev(n) {}
 
   template <typename A>
-  void dfs(const vector<vector<A>> &g, const int u) {
+  inline void dfs(const vector<vector<A>> &g, const int u) {
     visited[u] = true;
     for (const A vertex : g[u]) {
       const int v = static_cast<int>(vertex);

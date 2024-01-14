@@ -16,7 +16,7 @@ private:
                                  dist(n, vector<int64_t>(1 + max_height)) {}
 
   template <typename A, typename B>
-  void dfs(const vector<vector<pair<A, B>>> &g, const int u, const int p) {
+  inline void dfs(const vector<vector<pair<A, B>>> &g, const int u, const int p) {
     in_time[u] = ++time_elapsed;
     parent[u][0] = p;
     subtree_size[u] = 1;

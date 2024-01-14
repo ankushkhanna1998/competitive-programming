@@ -15,7 +15,7 @@ inline void generate_case(ofstream &cout, mt19937_64 &rng) {
 
 atomic<uint64_t> tests_run(0);
 
-void signal_handler(const int signal_code) {
+inline void signal_handler(const int signal_code) {
   cerr << endl << "Keyboard Interrupt!" << endl;
   cerr << " Tests Run: " << tests_run << endl;
   exit(signal_code);

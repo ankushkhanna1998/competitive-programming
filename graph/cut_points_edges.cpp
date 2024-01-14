@@ -10,7 +10,7 @@ private:
                                          in_time(n), min_time(n) {}
 
   template <typename A>
-  void dfs(const vector<vector<A>> &g, const int u, const int p) {
+  inline void dfs(const vector<vector<A>> &g, const int u, const int p) {
     visited[u] = true;
     in_time[u] = min_time[u] = ++time_elapsed;
     int children = 0;
