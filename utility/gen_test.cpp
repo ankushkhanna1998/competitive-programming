@@ -6,8 +6,9 @@
 
 using namespace std;
 
-inline void generate_case(ofstream &cout) {
+inline void generate_case(ofstream &cout, mt19937_64 &rng) {
   /* Generate a test case here... */
+  // TODO
 
   cout.flush();
 }
@@ -28,7 +29,7 @@ int main() {
 
   while (true) {
     ofstream fout("in.txt", ios_base::out);
-    generate_case(fout);
+    generate_case(fout, rng);
     fout.close();
 
     string a, b;
@@ -63,7 +64,7 @@ int main() {
         cerr << "Unexpected Error at line " << __LINE__ << endl;
         exit(0);
       }
-      cout << endl;
+      cout << "\nTests Run: " << tests_run << endl;
       break;
     }
   }
