@@ -377,13 +377,14 @@ public:
   </snippet>
   <snippet>
     <tag>phi</tag>
-    <text><![CDATA[inline int64_t phi(int64_t n) {
-  int64_t ans = n;
+    <text><![CDATA[template <typename T>
+inline T phi(T n) {
+  T ans = n;
   n >>= __builtin_ctzll(n);
   if (ans != n) {
     ans >>= 1;
   }
-  for (int64_t i = 3; i * i <= n; i += 2) {
+  for (T i = 3; i * i <= n; i += 2) {
     if (n % i == 0) {
       ans -= ans / i;
       while (n % i == 0) {
@@ -413,9 +414,28 @@ inline vector<int> phi_all(const int n) {
   </snippet>
   <snippet>
     <tag>sieve</tag>
-    <text><![CDATA[inline vector<int> sieve(const int n) {
+    <text><![CDATA[template <typename T>
+inline bool is_prime(const T n) {
+  if (n < 9) {
+    return n == 2 || n == 3 || n == 5 || n == 7;
+  }
+  if ((n & 1) == 0) {
+    return false;
+  }
+  for (T i = 3; i * i <= n; i += 2) {
+    if (n % i == 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+inline vector<int> sieve(const int n) {
   vector<bool> prime(n + 1, true);
-  for (int i = 2; i * i <= n; i++) {
+  for (int i = 4; i <= n; i += 2) {
+    prime[i] = false;
+  }
+  for (int i = 3; i * i <= n; i += 2) {
     if (prime[i]) {
       for (int j = i * i; j <= n; j += i) {
         prime[j] = false;
@@ -465,7 +485,7 @@ public:
     for (int i = 4; i <= MAXN; i += 2) {
       spf[i] = 2;
     }
-    for (int i = 3; i * i <= MAXN; i++) {
+    for (int i = 3; i * i <= MAXN; i += 2) {
       if (spf[i] == i) {
         for (int j = i * i; j <= MAXN; j += i) {
           if (spf[j] == j) {

@@ -1,10 +1,11 @@
-inline int64_t phi(int64_t n) {
-  int64_t ans = n;
+template <typename T>
+inline T phi(T n) {
+  T ans = n;
   n >>= __builtin_ctzll(n);
   if (ans != n) {
     ans >>= 1;
   }
-  for (int64_t i = 3; i * i <= n; i += 2) {
+  for (T i = 3; i * i <= n; i += 2) {
     if (n % i == 0) {
       ans -= ans / i;
       while (n % i == 0) {

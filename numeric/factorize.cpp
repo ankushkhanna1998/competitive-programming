@@ -29,7 +29,7 @@ public:
     for (int i = 4; i <= MAXN; i += 2) {
       spf[i] = 2;
     }
-    for (int i = 3; i * i <= MAXN; i++) {
+    for (int i = 3; i * i <= MAXN; i += 2) {
       if (spf[i] == i) {
         for (int j = i * i; j <= MAXN; j += i) {
           if (spf[j] == j) {
