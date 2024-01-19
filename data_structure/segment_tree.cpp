@@ -80,7 +80,7 @@ public:
                                               lazy(_n << 2, _default) {}
 
   template <typename A>
-  inline segment_tree(const vector<A> a,
+  inline segment_tree(const vector<A> &a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : segment_tree(a.size(), _unite, _default) {
     build(a, 0, 0, (int) n - 1);

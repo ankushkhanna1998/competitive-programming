@@ -322,7 +322,7 @@ public:
                                               fenw(_n, _default) {}
 
   template <typename A>
-  inline fenwick_tree(const vector<A> a,
+  inline fenwick_tree(const vector<A> &a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : fenwick_tree(a.size(), _unite, _default) {
     for (int i = 0; i < (int) n; i++) {
@@ -592,7 +592,7 @@ public:
                                               lazy(_n << 2, _default) {}
 
   template <typename A>
-  inline segment_tree(const vector<A> a,
+  inline segment_tree(const vector<A> &a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : segment_tree(a.size(), _unite, _default) {
     build(a, 0, 0, (int) n - 1);
@@ -629,7 +629,7 @@ private:
 public:
 
   template <typename A>
-  inline sparse_table(const vector<A> _a,
+  inline sparse_table(const vector<A> &_a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : n(_a.size()),
                                               unite(_unite),

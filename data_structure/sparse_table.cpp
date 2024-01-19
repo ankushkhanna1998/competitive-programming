@@ -13,7 +13,7 @@ private:
 public:
 
   template <typename A>
-  inline sparse_table(const vector<A> _a,
+  inline sparse_table(const vector<A> &_a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : n(_a.size()),
                                               unite(_unite),

@@ -19,7 +19,7 @@ public:
                                               fenw(_n, _default) {}
 
   template <typename A>
-  inline fenwick_tree(const vector<A> a,
+  inline fenwick_tree(const vector<A> &a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : fenwick_tree(a.size(), _unite, _default) {
     for (int i = 0; i < (int) n; i++) {
