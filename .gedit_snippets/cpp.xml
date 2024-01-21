@@ -1092,4 +1092,9 @@ template <typename K, typename V, typename C = less<K>>
 using indexed_map = tree<K, V, C, rb_tree_tag, tree_order_statistics_node_update>;]]></text>
     <description>GNU PBDS</description>
   </snippet>
+  <snippet>
+    <tag>rng</tag>
+    <text><![CDATA[mt19937_64 rng(chrono::high_resolution_clock::now().time_since_epoch().count());]]></text>
+    <description>random</description>
+  </snippet>
 </snippets>

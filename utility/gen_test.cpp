@@ -25,7 +25,7 @@ int main() {
   signal(SIGINT, signal_handler);
 
   char buf[64];
-  mt19937_64 rng(chrono::system_clock::now().time_since_epoch().count());
+  mt19937_64 rng(chrono::high_resolution_clock::now().time_since_epoch().count());
 
   while (true) {
     ofstream fout("in.txt", ios_base::out);
