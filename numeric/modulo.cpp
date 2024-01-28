@@ -39,11 +39,8 @@ public:
     return M;
   }
 
-  template <typename T>
-  inline explicit operator T() const { return static_cast<T>(value); }
-
+  template <typename T> inline explicit operator T() const { return static_cast<T>(value); }
   inline const int64_t& operator()() const { return value; }
-
   inline modular& operator+=(const modular &x) { if ((value += x.value) >= M) value -= M; return *this; }
   inline modular& operator-=(const modular &x) { if ((value -= x.value) < 0) value += M; return *this; }
   inline modular& operator*=(const modular &x) { value = normalize(value * x.value); return *this; }
@@ -59,17 +56,25 @@ public:
   inline modular operator/(const modular &x) const { return (modular(value) /= x); }
   inline bool operator==(const modular &x) const { return value == x.value; }
   inline bool operator<(const modular &x) const { return value < x.value; }
+  inline bool operator>(const modular &x) const { return value > x.value; }
   inline bool operator<=(const modular &x) const { return value <= x.value; }
+  inline bool operator>=(const modular &x) const { return value >= x.value; }
   inline bool operator!=(const modular &x) const { return value != x.value; }
 
   template <typename T, const int64_t M_>
   friend inline T& operator>>(T&, modular<M_>&);
 };
 
-template <typename T, const int64_t M = MOD>
-inline modular<M> operator/(const T &lhs, const modular<M> &rhs) {
-  return (modular<M>(lhs) /= rhs);
-}
+template <typename T, const int64_t M = MOD> inline modular<M> operator+(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) += rhs); }
+template <typename T, const int64_t M = MOD> inline modular<M> operator-(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) -= rhs); }
+template <typename T, const int64_t M = MOD> inline modular<M> operator*(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) *= rhs); }
+template <typename T, const int64_t M = MOD> inline modular<M> operator/(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) /= rhs); }
+template <typename T, const int64_t M = MOD> inline bool operator==(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) == rhs); }
+template <typename T, const int64_t M = MOD> inline bool operator<(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) < rhs); }
+template <typename T, const int64_t M = MOD> inline bool operator>(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) > rhs); }
+template <typename T, const int64_t M = MOD> inline bool operator<=(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) <= rhs); }
+template <typename T, const int64_t M = MOD> inline bool operator>=(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) >= rhs); }
+template <typename T, const int64_t M = MOD> inline bool operator!=(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) != rhs); }
 
 template <const int64_t M = MOD>
 inline modular<M> power(modular<M> a, int64_t b) {
@@ -151,12 +156,8 @@ public:
     return _fact[n] * _inv_fact[n - k] * _inv_fact[k];
   }
 };
-
-template <const int64_t M>
-vector<modular<M>> combinatorics<M>::_fact(1, 1);
-
-template <const int64_t M>
-vector<modular<M>> combinatorics<M>::_inv_fact(1, 1);
+template <const int64_t M> vector<modular<M>> combinatorics<M>::_fact(1, 1);
+template <const int64_t M> vector<modular<M>> combinatorics<M>::_inv_fact(1, 1);
 
 using mint = modular<MOD>;
 using math = combinatorics<MOD>;
