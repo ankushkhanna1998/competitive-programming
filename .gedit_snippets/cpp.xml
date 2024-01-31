@@ -644,6 +644,7 @@ private:
   const size_t n;
   const function<T(const T, const T)> unite;
   const T DEFAULT;
+  const bool MIN_MAX;
 
   vector<T> tree, lazy;
 
@@ -660,14 +661,18 @@ private:
     tree[v] = unite(tree[tree_left], tree[tree_right]);
   }
 
+  inline void push_down(const int v, const int from, const int to, const T delta) {
+    tree[v] += delta * (MIN_MAX ? 1 : (to - from + 1));
+    if (from != to) {
+      const int tree_left = v << 1 | 1, tree_right = tree_left + 1;
+      lazy[tree_left] += delta;
+      lazy[tree_right] += delta;
+    }
+  }
+
   inline void propagate(const int v, const int from, const int to) {
     if (lazy[v] != 0) {
-      tree[v] += lazy[v] * (to - from + 1);
-      if (from != to) {
-        const int tree_left = v << 1 | 1, tree_right = tree_left + 1;
-        lazy[tree_left] += lazy[v];
-        lazy[tree_right] += lazy[v];
-      }
+      push_down(v, from, to, lazy[v]);
       lazy[v] = 0;
     }
   }
@@ -677,15 +682,11 @@ private:
     if (to < l || r < from || to < from) {
       return;
     }
-    const int tree_left = v << 1 | 1, tree_right = tree_left + 1;
     if (l <= from && to <= r) {
-      tree[v] += delta * (to - from + 1);
-      if (from != to) {
-        lazy[tree_left] += delta;
-        lazy[tree_right] += delta;
-      }
+      push_down(v, from, to, delta);
       return;
     }
+    const int tree_left = v << 1 | 1, tree_right = tree_left + 1;
     const int coverage_mid = (from + to) >> 1;
     update(tree_left, from, coverage_mid, l, r, delta);
     update(tree_right, coverage_mid + 1, to, l, r, delta);
@@ -711,16 +712,19 @@ public:
 
   inline segment_tree(const size_t _n,
                       const function<T(const T, const T)> &_unite = plus<T>(),
-                      const T _default = 0) : n(_n),
-                                              unite(_unite),
-                                              DEFAULT(_default),
-                                              tree(_n << 2, _default),
-                                              lazy(_n << 2, _default) {}
+                      const T _default = 0,
+                      const bool _min_max = false) : n(_n),
+                                                     unite(_unite),
+                                                     DEFAULT(_default),
+                                                     MIN_MAX(_min_max),
+                                                     tree(_n << 2, _default),
+                                                     lazy(_n << 2) {}
 
   template <typename A>
   inline segment_tree(const vector<A> &a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
-                      const T _default = 0) : segment_tree(a.size(), _unite, _default) {
+                      const T _default = 0,
+                      const bool _min_max = false) : segment_tree(a.size(), _unite, _default, _min_max) {
     build(a, 0, 0, (int) n - 1);
   }
 
