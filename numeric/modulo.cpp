@@ -61,33 +61,40 @@ public:
   inline bool operator>=(const modular &x) const { return value >= x.value; }
   inline bool operator!=(const modular &x) const { return value != x.value; }
 
-  template <typename T, const int64_t M_>
+  template <const int64_t M_, typename T>
   friend inline T& operator>>(T&, modular<M_>&);
 };
 
-template <typename T, const int64_t M = MOD> inline modular<M> operator+(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) += rhs); }
-template <typename T, const int64_t M = MOD> inline modular<M> operator-(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) -= rhs); }
-template <typename T, const int64_t M = MOD> inline modular<M> operator*(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) *= rhs); }
-template <typename T, const int64_t M = MOD> inline modular<M> operator/(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) /= rhs); }
-template <typename T, const int64_t M = MOD> inline bool operator==(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) == rhs); }
-template <typename T, const int64_t M = MOD> inline bool operator<(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) < rhs); }
-template <typename T, const int64_t M = MOD> inline bool operator>(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) > rhs); }
-template <typename T, const int64_t M = MOD> inline bool operator<=(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) <= rhs); }
-template <typename T, const int64_t M = MOD> inline bool operator>=(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) >= rhs); }
-template <typename T, const int64_t M = MOD> inline bool operator!=(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) != rhs); }
+template <const int64_t M = MOD, typename T> inline modular<M> operator+(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) += rhs); }
+template <const int64_t M = MOD, typename T> inline modular<M> operator-(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) -= rhs); }
+template <const int64_t M = MOD, typename T> inline modular<M> operator*(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) *= rhs); }
+template <const int64_t M = MOD, typename T> inline modular<M> operator/(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) /= rhs); }
+template <const int64_t M = MOD, typename T> inline bool operator==(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) == rhs); }
+template <const int64_t M = MOD, typename T> inline bool operator<(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) < rhs); }
+template <const int64_t M = MOD, typename T> inline bool operator>(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) > rhs); }
+template <const int64_t M = MOD, typename T> inline bool operator<=(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) <= rhs); }
+template <const int64_t M = MOD, typename T> inline bool operator>=(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) >= rhs); }
+template <const int64_t M = MOD, typename T> inline bool operator!=(const T &lhs, const modular<M> &rhs) { return (modular<M>(lhs) != rhs); }
 
-template <const int64_t M = MOD>
-inline modular<M> power(modular<M> a, int64_t b) {
+template <const int64_t M = MOD, typename A, typename B>
+inline modular<M> power(const A &_a, const B &_b) {
+  modular<M> a = _a;
+  int64_t b = static_cast<int64_t>(_b);
   assert(b >= 0);
-  modular<M> res = 1;
+  modular<M> result = 1;
   while (b != 0) {
     if ((b & 1) == 1) {
-      res *= a;
+      result *= a;
     }
     a *= a;
     b >>= 1;
   }
-  return res;
+  return result;
+}
+
+template <const int64_t M = MOD>
+inline modular<M> inverse(const modular<M> &a) {
+  return modular<M>(inverse(a(), M));
 }
 
 template <const int64_t M = MOD>
@@ -100,7 +107,7 @@ inline const int64_t& abs(const modular<M> &number) {
   return number();
 }
 
-template <typename T, const int64_t M = MOD>
+template <const int64_t M = MOD, typename T>
 inline T& operator>>(T &input_stream, modular<M> &number) {
   int64_t x;
   input_stream >> x;
@@ -108,7 +115,7 @@ inline T& operator>>(T &input_stream, modular<M> &number) {
   return input_stream;
 }
 
-template <typename T, const int64_t M = MOD>
+template <const int64_t M = MOD, typename T>
 inline T& operator<<(T &output_stream, const modular<M> &number) {
   return (output_stream << number());
 }
