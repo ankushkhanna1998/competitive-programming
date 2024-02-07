@@ -25,18 +25,20 @@ public:
     return (x == p[x] ? x : (p[x] = get_parent(p[x])));
   }
 
-  inline void unite(int x, int y) {
-    if ((x = get_parent(x)) != (y = get_parent(y))) {
-      if (sz[x] < sz[y]) {
-        swap(x, y);
-      }
-      p[y] = x;
-      sz[x] += sz[y];
-      components--;
-    }
-  }
-
   inline int get_size(const int x) {
     return sz[get_parent(x)];
+  }
+
+  inline bool unite(int x, int y) {
+    if ((x = get_parent(x)) == (y = get_parent(y))) {
+      return false;
+    }
+    if (sz[x] < sz[y]) {
+      swap(x, y);
+    }
+    p[y] = x;
+    sz[x] += sz[y];
+    components--;
+    return true;
   }
 };
