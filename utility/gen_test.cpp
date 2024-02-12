@@ -9,7 +9,6 @@ using namespace std;
 inline void generate_case(ofstream &cout, mt19937_64 &rng) {
   /* Generate a test case here... */
   // TODO
-
   cout.flush();
 }
 
