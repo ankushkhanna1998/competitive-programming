@@ -166,5 +166,5 @@ public:
 template <const int64_t M> vector<modular<M>> combinatorics<M>::_fact(1, 1);
 template <const int64_t M> vector<modular<M>> combinatorics<M>::_inv_fact(1, 1);
 
-using mint = modular<MOD>;
+using mint_t = modular<MOD>;
 using math_t = combinatorics<MOD>;
