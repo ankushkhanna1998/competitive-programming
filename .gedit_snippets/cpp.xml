@@ -813,82 +813,84 @@ public:
   </snippet>
   <snippet>
     <tag>trie</tag>
-    <text><![CDATA[class trie {
+    <text><![CDATA[template <typename T>
+class trie {
 
 private:
 
-  const int K;
+  typedef typename T::value_type key_type;
+  typedef unordered_map<key_type, int> next_table;
+  typedef typename next_table::const_iterator vertex_pointer;
 
   struct vertex {
 
     int leaf, count;
-    vector<int> next;
-
-    inline vertex(const int _K) : leaf(0), count(0), next(_K, -1) {}
+    next_table next;
   };
 
-  vector<vertex> t;
+  vector<vertex> tree;
 
-  inline int get_pos(const char c) const {
-    // modify if required
-    return tolower(c) - 'a';
+  inline int get_next(const vertex &v, const key_type c) const {
+    const vertex_pointer ptr = v.next.find(c);
+    return (ptr == v.next.end() ? -1 : ptr->second);
+  }
+
+  inline int put_next(vertex &v, const key_type c) {
+    int i = get_next(v, c);
+    if (i == -1) {
+      i = (int) tree.size();
+      v.next.emplace(c, i);
+      tree.emplace_back();
+    }
+    return i;
   }
 
 public:
 
-  inline trie(const int _K = 26) : K(_K), t(1, vertex(_K)) {}
+  inline trie() : tree(1) {}
 
-  inline void insert(const string &s) {
+  inline void insert(const T &s) {
     int v = 0;
-    for (const char c : s) {
-      const int i = get_pos(c);
-      if (t[v].next[i] == -1) {
-        t[v].next[i] = (int) t.size();
-        t.emplace_back(K);
-      }
-      t[v].count++;
-      v = t[v].next[i];
+    for (const key_type c : s) {
+      tree[v].count++;
+      v = put_next(tree[v], c);
     }
-    t[v].count++;
-    t[v].leaf++;
+    tree[v].count++;
+    tree[v].leaf++;
   }
 
-  inline bool find(const string &s, const bool is_prefix = true) const {
+  inline bool find(const T &s, const bool is_prefix = true) const {
     int v = 0;
-    for (const char c : s) {
-      const int i = get_pos(c);
-      if (t[v].next[i] == -1) {
+    for (const key_type c : s) {
+      const int nxt = get_next(tree[v], c);
+      if (nxt == -1) {
         return false;
       }
-      v = t[v].next[i];
+      v = nxt;
     }
-    return (is_prefix ? t[v].count : t[v].leaf) > 0;
+    return (is_prefix ? tree[v].count : tree[v].leaf) > 0;
   }
 
-  inline void erase(const string &s) {
+  inline bool erase(const T &s) {
     if (!find(s, false)) {
-      return;
+      return false;
     }
     int v = 0;
-    for (const char c : s) {
-      const int i = get_pos(c);
-      t[v].count--;
-      v = t[v].next[i];
+    for (const key_type c : s) {
+      tree[v].count--;
+      v = get_next(tree[v], c);
     }
-    t[v].count--;
-    t[v].leaf--;
+    tree[v].count--;
+    tree[v].leaf--;
+    return true;
   }
 
   inline bool empty() const {
-    return t[0].count == 0;
+    return tree[0].count == 0;
   }
 
   inline size_t size() const {
-    return (size_t) t[0].count;
-  }
-
-  inline size_t alphabet_size() const {
-    return (size_t) K;
+    return (size_t) tree[0].count;
   }
 };]]></text>
     <description>Trie</description>
