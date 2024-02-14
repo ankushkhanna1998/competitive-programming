@@ -9,12 +9,23 @@ private fun main() {
   console.close()
 }
 
-private val console = IOConsole()
+private val console = IOConsole.getInstance()
 
-private class IOConsole {
+private class IOConsole private constructor() {
 
   private val input = BufferedReader(InputStreamReader(System.`in`))
-  private val output = PrintWriter(System.out)
+  private val output = PrintWriter(System.out, false)
+
+  companion object {
+
+    @JvmStatic
+    private val instance = IOConsole()
+
+    @JvmStatic
+    fun getInstance(): IOConsole {
+      return instance
+    }
+  }
 
   fun readLine(): String = input.readLine()
   fun readInt() = readLine().toInt()
@@ -35,8 +46,8 @@ private class IOConsole {
     output.print(token ?: "null")
   }
 
-  fun debug(token: Any?, message: String?) {
-    System.err.println("Debug: \"$message\" $token")
+  fun debug(message: String?, token: Any?) {
+    System.err.println("Debug: \"$message\" = \"$token\"")
     System.err.flush()
   }
 

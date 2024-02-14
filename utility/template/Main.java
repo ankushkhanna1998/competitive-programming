@@ -11,8 +11,6 @@ import java.util.stream.Stream;
 
 public final class Main {
 
-  private static final IOConsole console = new IOConsole();
-
   public static void main(final String[] args) throws IOException {
     int testCases = console.nextInt();
     while (testCases-- > 0) {
@@ -20,19 +18,33 @@ public final class Main {
     }
     console.close();
   }
+
+  private static final IOConsole console = IOConsole.getInstance();
 }
 
 final class IOConsole {
 
-  private final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-  private final PrintWriter output = new PrintWriter(System.out);
+  private static final IOConsole instance = new IOConsole();
 
-  private StringTokenizer tokenizer = null;
+  private final BufferedReader input;
+  private final PrintWriter output;
+
+  private StringTokenizer tokenizer;
+
+  private IOConsole() {
+    input = new BufferedReader(new InputStreamReader(System.in));
+    output = new PrintWriter(System.out, false);
+    tokenizer = null;
+  }
 
   private void ensureTokens() throws IOException {
     while (tokenizer == null || !tokenizer.hasMoreTokens()) {
       tokenizer = new StringTokenizer(input.readLine());
     }
+  }
+
+  public static IOConsole getInstance() {
+    return instance;
   }
 
   public String nextLine() throws IOException {
@@ -106,8 +118,8 @@ final class IOConsole {
     output.print(object);
   }
 
-  public void debug(final Object object, final String message) {
-    System.err.println("Debug: " + message + object);
+  public void debug(final String message, final Object object) {
+    System.err.println("Debug: \"" + message + "\" = \"" + object + "\"");
     System.err.flush();
   }
 
