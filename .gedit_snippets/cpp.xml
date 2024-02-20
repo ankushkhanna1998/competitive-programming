@@ -826,8 +826,11 @@ private:
 
     int leaf, count;
     next_table next;
+
+    inline vertex() : leaf(0), count(0), next() {}
   };
 
+  int unique_prefixes, unique_strings;
   vector<vertex> tree;
 
   inline int get_next(const vertex &v, const key_type c) const {
@@ -845,43 +848,61 @@ private:
     return i;
   }
 
-public:
-
-  inline trie() : tree(1) {}
-
-  inline void insert(const T &s) {
-    int v = 0;
-    for (const key_type c : s) {
-      tree[v].count++;
-      v = put_next(tree[v], c);
+  inline void update_counts(const int v, const int n, const bool is_prefix) {
+    int &cnt = (is_prefix ? tree[v].count : tree[v].leaf);
+    int &uniques = (is_prefix ? unique_prefixes : unique_strings);
+    cnt += n;
+    if (cnt == 0) {
+      uniques--;
+    } else if (cnt == n) {
+      uniques++;
     }
-    tree[v].count++;
-    tree[v].leaf++;
   }
 
-  inline bool find(const T &s, const bool is_prefix = true) const {
+  inline void update(const T &s, const int copies) {
+    int v = 0;
+    for (const key_type c : s) {
+      v = put_next(tree[v], c);
+      update_counts(v, copies, true);
+    }
+    if (v != 0) {
+      update_counts(v, copies, false);
+      tree[0].count += copies;
+    }
+  }
+
+public:
+
+  inline trie() : unique_prefixes(0), unique_strings(0), tree(1) {}
+
+  inline void insert(const T &s, const int copies = 1) {
+    assert(copies > 0);
+    update(s, copies);
+  }
+
+  inline int count(const T &s, const bool is_prefix = true) const {
     int v = 0;
     for (const key_type c : s) {
       const int nxt = get_next(tree[v], c);
       if (nxt == -1) {
-        return false;
+        return 0;
       }
       v = nxt;
     }
-    return (is_prefix ? tree[v].count : tree[v].leaf) > 0;
+    return (v == 0 ? 0 : (is_prefix ? tree[v].count : tree[v].leaf));
   }
 
-  inline bool erase(const T &s) {
-    if (!find(s, false)) {
+  inline bool find(const T &s, const bool is_prefix = true) const {
+    return count(s, is_prefix) != 0;
+  }
+
+  inline bool erase(const T &s, const int copies = 1) {
+    const int cnt = count(s, false);
+    if (cnt == 0) {
       return false;
     }
-    int v = 0;
-    for (const key_type c : s) {
-      tree[v].count--;
-      v = get_next(tree[v], c);
-    }
-    tree[v].count--;
-    tree[v].leaf--;
+    assert(copies > 0);
+    update(s, -min(copies, cnt));
     return true;
   }
 
@@ -891,6 +912,10 @@ public:
 
   inline size_t size() const {
     return (size_t) tree[0].count;
+  }
+
+  inline size_t unique_count(const bool is_prefix = false) const {
+    return (size_t) (is_prefix ? unique_prefixes : unique_strings);
   }
 };]]></text>
     <description>Trie</description>
