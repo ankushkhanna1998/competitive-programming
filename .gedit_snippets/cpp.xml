@@ -238,8 +238,8 @@ public:
 
   template <typename T> inline explicit operator T() const { return static_cast<T>(value); }
   inline const int64_t& operator()() const { return value; }
-  inline modular& operator+=(const modular &x) { if ((value += x.value) >= M) value -= M; return *this; }
-  inline modular& operator-=(const modular &x) { if ((value -= x.value) < 0) value += M; return *this; }
+  inline modular& operator+=(const modular &x) { if ((value += x.value) >= M) { value -= M; } return *this; }
+  inline modular& operator-=(const modular &x) { if ((value -= x.value) < 0) { value += M; } return *this; }
   inline modular& operator*=(const modular &x) { value = normalize(value * x.value); return *this; }
   inline modular& operator/=(const modular &x) { return (*this *= modular(inverse(x.value, M))); }
   inline modular& operator++() { return (*this += 1); }
