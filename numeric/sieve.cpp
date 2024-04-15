@@ -26,11 +26,11 @@ inline vector<int> sieve(const int n) {
       }
     }
   }
-  vector<int> res;
+  vector<int> primes;
   for (int i = 2; i <= n; i++) {
     if (prime[i]) {
-      res.push_back(i);
+      primes.push_back(i);
     }
   }
-  return res;
+  return primes;
 }

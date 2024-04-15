@@ -382,18 +382,18 @@ using math_t = combinatorics<MOD>;]]></text>
 
 private:
 
-  const size_t n;
+  const int n;
 
   int components;
   vector<int> p, sz;
 
 public:
 
-  inline dsu(const size_t _n) : n(_n), components(_n), p(_n), sz(_n, 1) {
+  inline dsu(const int _n) : n(_n), components(_n), p(_n), sz(_n, 1) {
     iota(p.begin(), p.end(), 0);
   }
 
-  inline size_t size() const {
+  inline int size() const {
     return n;
   }
 
@@ -441,7 +441,7 @@ class fenwick_tree {
 
 private:
 
-  const size_t n;
+  const int n;
   const function<T(const T, const T)> unite;
   const T DEFAULT;
 
@@ -449,7 +449,7 @@ private:
 
 public:
 
-  inline fenwick_tree(const size_t _n,
+  inline fenwick_tree(const int _n,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : n(_n),
                                               unite(_unite),
@@ -460,19 +460,19 @@ public:
   inline fenwick_tree(const vector<A> &a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : fenwick_tree(a.size(), _unite, _default) {
-    for (int i = 0; i < (int) n; i++) {
+    for (int i = 0; i < n; i++) {
       update(i, a[i]);
     }
   }
 
   inline void update(int x, const T delta) {
-    while (x < (int) n) {
+    while (x < n) {
       fenw[x] += delta;
       x |= x + 1;
     }
   }
 
-  inline size_t size() const {
+  inline int size() const {
     return n;
   }
 
@@ -489,13 +489,13 @@ public:
     return query(r) - query(l - 1);
   }
 
-  inline int order_of_key(const T val) const {
-    return (val == 0 ? 0 : (int) query(val - 1));
+  inline T order_of_key(const T val) const {
+    return (val == 0 ? 0 : query(val - 1));
   }
 
   inline T find_by_order(const int pos) const {
     T res = DEFAULT;
-    int low = 0, high = (int) n - 1;
+    int low = 0, high = n - 1;
     while (low <= high) {
       const int mid = (low + high) >> 1;
       if (query(mid) >= pos + 1) {
@@ -514,23 +514,23 @@ public:
     <tag>phi</tag>
     <text><![CDATA[template <typename T>
 inline T phi(T n) {
-  T ans = n;
+  T result = n;
   n >>= __builtin_ctzll(n);
-  if (ans != n) {
-    ans >>= 1;
+  if (result != n) {
+    result >>= 1;
   }
   for (T i = 3; i * i <= n; i += 2) {
     if (n % i == 0) {
-      ans -= ans / i;
+      result -= result / i;
       while (n % i == 0) {
         n /= i;
       }
     }
   }
   if (n > 2) {
-    ans -= ans / n;
+    result -= result / n;
   }
-  return ans;
+  return result;
 }
 
 inline vector<int> phi_all(const int n) {
@@ -577,13 +577,13 @@ inline vector<int> sieve(const int n) {
       }
     }
   }
-  vector<int> res;
+  vector<int> primes;
   for (int i = 2; i <= n; i++) {
     if (prime[i]) {
-      res.push_back(i);
+      primes.push_back(i);
     }
   }
-  return res;
+  return primes;
 }]]></text>
     <description>Prime Sieve</description>
   </snippet>
@@ -591,38 +591,38 @@ inline vector<int> sieve(const int n) {
     <tag>factorize</tag>
     <text><![CDATA[template <typename T>
 inline vector<T> factorize(T n) {
-  vector<T> res(__builtin_ctzll(n), 2);
-  n >>= res.size();
+  vector<T> factors(__builtin_ctzll(n), 2);
+  n >>= factors.size();
   for (T i = 3; i * i <= n; i += 2) {
     while (n % i == 0) {
       n /= i;
-      res.push_back(i);
+      factors.push_back(i);
     }
   }
   if (n > 2) {
-    res.push_back(n);
+    factors.push_back(n);
   }
-  return res;
+  return factors;
 }
 
 class factorizer {
 
 private:
 
-  const int MAXN;
+  const int MAX_N;
 
   vector<int> spf;
 
 public:
 
-  inline factorizer(const int _n) : MAXN(_n), spf(_n + 1) {
+  inline factorizer(const int _n) : MAX_N(_n), spf(_n + 1) {
     iota(spf.begin(), spf.end(), 0);
-    for (int i = 4; i <= MAXN; i += 2) {
+    for (int i = 4; i <= MAX_N; i += 2) {
       spf[i] = 2;
     }
-    for (int i = 3; i * i <= MAXN; i += 2) {
+    for (int i = 3; i * i <= MAX_N; i += 2) {
       if (spf[i] == i) {
-        for (int j = i * i; j <= MAXN; j += i) {
+        for (int j = i * i; j <= MAX_N; j += i) {
           if (spf[j] == j) {
             spf[j] = i;
           }
@@ -632,13 +632,13 @@ public:
   }
 
   inline vector<int> factorize(int n) const {
-    assert(0 < n && n <= MAXN);
-    vector<int> res;
+    assert(0 < n && n <= MAX_N);
+    vector<int> factors;
     while (n > 1) {
-      res.push_back(spf[n]);
+      factors.push_back(spf[n]);
       n /= spf[n];
     }
-    return res;
+    return factors;
   }
 };]]></text>
     <description>Prime Factorization</description>
@@ -650,7 +650,7 @@ class segment_tree {
 
 private:
 
-  const size_t n;
+  const int n;
   const function<T(const T, const T)> unite;
   const T DEFAULT;
   const bool MIN_MAX;
@@ -719,7 +719,7 @@ private:
 
 public:
 
-  inline segment_tree(const size_t _n,
+  inline segment_tree(const int _n,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0,
                       const bool _min_max = false) : n(_n),
@@ -734,19 +734,19 @@ public:
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0,
                       const bool _min_max = false) : segment_tree(a.size(), _unite, _default, _min_max) {
-    build(a, 0, 0, (int) n - 1);
+    build(a, 0, 0, n - 1);
   }
 
-  inline size_t size() const {
+  inline int size() const {
     return n;
   }
 
   inline void update(const int l, const int r, const T delta) {
-    update(0, 0, (int) n - 1, l, r, delta);
+    update(0, 0, n - 1, l, r, delta);
   }
 
   inline T query(const int l, const int r) {
-    return query(0, 0, (int) n - 1, l, r);
+    return query(0, 0, n - 1, l, r);
   }
 };]]></text>
     <description>Segment Tree</description>
@@ -758,7 +758,7 @@ class sparse_table {
 
 private:
 
-  const size_t n;
+  const int n;
   const function<T(const T, const T)> unite;
   const T DEFAULT;
 
@@ -780,7 +780,7 @@ public:
       const int ones = (1 << i) - 1;
       T now = DEFAULT;
       st_a[i].resize(n, DEFAULT);
-      for (int j = 0; j < (int) n; j++) {
+      for (int j = 0; j < n; j++) {
         now = st_a[i][j] = unite(now, a[j]);
         if ((j & ones) == ones) {
           now = DEFAULT;
@@ -788,7 +788,7 @@ public:
       }
       now = DEFAULT;
       st_b[i].resize(n, DEFAULT);
-      for (int j = (int) n - 1; j >= 0; j--) {
+      for (int j = n - 1; j >= 0; j--) {
         now = st_b[i][j] = unite(now, a[j]);
         if ((j & ones) == 0) {
           now = DEFAULT;
@@ -797,7 +797,7 @@ public:
     }
   }
 
-  inline size_t size() const {
+  inline int size() const {
     return n;
   }
 
@@ -818,9 +818,9 @@ class trie {
 
 private:
 
-  typedef typename T::value_type key_type;
+  typedef T::value_type key_type;
   typedef unordered_map<key_type, int> next_table;
-  typedef typename next_table::const_iterator vertex_pointer;
+  typedef next_table::const_iterator vertex_pointer;
 
   struct vertex {
 
@@ -910,12 +910,12 @@ public:
     return tree[0].count == 0;
   }
 
-  inline size_t size() const {
-    return (size_t) tree[0].count;
+  inline int size() const {
+    return tree[0].count;
   }
 
-  inline size_t unique_count(const bool is_prefix = false) const {
-    return (size_t) (is_prefix ? unique_prefixes : unique_strings);
+  inline int unique_count(const bool is_prefix = false) const {
+    return (is_prefix ? unique_prefixes : unique_strings);
   }
 };]]></text>
     <description>Trie</description>
@@ -1257,10 +1257,10 @@ using indexed_set = tree<T, null_type, C, rb_tree_tag, tree_order_statistics_nod
 template <typename K, typename V, typename C = less<K>>
 using indexed_map = tree<K, V, C, rb_tree_tag, tree_order_statistics_node_update>;
 
-template <typename T, typename H = typename detail::default_hash_fn<T>::type>
+template <typename T, typename H = detail::default_hash_fn<T>::type>
 using hash_set = gp_hash_table<T, null_type, H>;
 
-template <typename K, typename V, typename H = typename detail::default_hash_fn<K>::type>
+template <typename K, typename V, typename H = detail::default_hash_fn<K>::type>
 using hash_map = gp_hash_table<K, V, H>;]]></text>
     <description>GNU PBDS</description>
   </snippet>

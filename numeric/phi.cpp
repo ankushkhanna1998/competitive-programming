@@ -1,22 +1,22 @@
 template <typename T>
 inline T phi(T n) {
-  T ans = n;
+  T result = n;
   n >>= __builtin_ctzll(n);
-  if (ans != n) {
-    ans >>= 1;
+  if (result != n) {
+    result >>= 1;
   }
   for (T i = 3; i * i <= n; i += 2) {
     if (n % i == 0) {
-      ans -= ans / i;
+      result -= result / i;
       while (n % i == 0) {
         n /= i;
       }
     }
   }
   if (n > 2) {
-    ans -= ans / n;
+    result -= result / n;
   }
-  return ans;
+  return result;
 }
 
 inline vector<int> phi_all(const int n) {

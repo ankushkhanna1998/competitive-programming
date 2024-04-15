@@ -3,7 +3,7 @@ class fenwick_tree {
 
 private:
 
-  const size_t n;
+  const int n;
   const function<T(const T, const T)> unite;
   const T DEFAULT;
 
@@ -11,7 +11,7 @@ private:
 
 public:
 
-  inline fenwick_tree(const size_t _n,
+  inline fenwick_tree(const int _n,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : n(_n),
                                               unite(_unite),
@@ -22,19 +22,19 @@ public:
   inline fenwick_tree(const vector<A> &a,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0) : fenwick_tree(a.size(), _unite, _default) {
-    for (int i = 0; i < (int) n; i++) {
+    for (int i = 0; i < n; i++) {
       update(i, a[i]);
     }
   }
 
   inline void update(int x, const T delta) {
-    while (x < (int) n) {
+    while (x < n) {
       fenw[x] += delta;
       x |= x + 1;
     }
   }
 
-  inline size_t size() const {
+  inline int size() const {
     return n;
   }
 
@@ -51,13 +51,13 @@ public:
     return query(r) - query(l - 1);
   }
 
-  inline int order_of_key(const T val) const {
-    return (val == 0 ? 0 : (int) query(val - 1));
+  inline T order_of_key(const T val) const {
+    return (val == 0 ? 0 : query(val - 1));
   }
 
   inline T find_by_order(const int pos) const {
     T res = DEFAULT;
-    int low = 0, high = (int) n - 1;
+    int low = 0, high = n - 1;
     while (low <= high) {
       const int mid = (low + high) >> 1;
       if (query(mid) >= pos + 1) {

@@ -3,7 +3,7 @@ class segment_tree {
 
 private:
 
-  const size_t n;
+  const int n;
   const function<T(const T, const T)> unite;
   const T DEFAULT;
   const bool MIN_MAX;
@@ -72,7 +72,7 @@ private:
 
 public:
 
-  inline segment_tree(const size_t _n,
+  inline segment_tree(const int _n,
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0,
                       const bool _min_max = false) : n(_n),
@@ -87,18 +87,18 @@ public:
                       const function<T(const T, const T)> &_unite = plus<T>(),
                       const T _default = 0,
                       const bool _min_max = false) : segment_tree(a.size(), _unite, _default, _min_max) {
-    build(a, 0, 0, (int) n - 1);
+    build(a, 0, 0, n - 1);
   }
 
-  inline size_t size() const {
+  inline int size() const {
     return n;
   }
 
   inline void update(const int l, const int r, const T delta) {
-    update(0, 0, (int) n - 1, l, r, delta);
+    update(0, 0, n - 1, l, r, delta);
   }
 
   inline T query(const int l, const int r) {
-    return query(0, 0, (int) n - 1, l, r);
+    return query(0, 0, n - 1, l, r);
   }
 };

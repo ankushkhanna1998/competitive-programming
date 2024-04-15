@@ -2,18 +2,18 @@ class dsu {
 
 private:
 
-  const size_t n;
+  const int n;
 
   int components;
   vector<int> p, sz;
 
 public:
 
-  inline dsu(const size_t _n) : n(_n), components(_n), p(_n), sz(_n, 1) {
+  inline dsu(const int _n) : n(_n), components(_n), p(_n), sz(_n, 1) {
     iota(p.begin(), p.end(), 0);
   }
 
-  inline size_t size() const {
+  inline int size() const {
     return n;
   }
 

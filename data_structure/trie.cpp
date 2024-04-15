@@ -3,9 +3,9 @@ class trie {
 
 private:
 
-  typedef typename T::value_type key_type;
+  typedef T::value_type key_type;
   typedef unordered_map<key_type, int> next_table;
-  typedef typename next_table::const_iterator vertex_pointer;
+  typedef next_table::const_iterator vertex_pointer;
 
   struct vertex {
 
@@ -95,11 +95,11 @@ public:
     return tree[0].count == 0;
   }
 
-  inline size_t size() const {
-    return (size_t) tree[0].count;
+  inline int size() const {
+    return tree[0].count;
   }
 
-  inline size_t unique_count(const bool is_prefix = false) const {
-    return (size_t) (is_prefix ? unique_prefixes : unique_strings);
+  inline int unique_count(const bool is_prefix = false) const {
+    return (is_prefix ? unique_prefixes : unique_strings);
   }
 };

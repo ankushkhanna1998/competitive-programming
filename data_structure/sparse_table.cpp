@@ -3,7 +3,7 @@ class sparse_table {
 
 private:
 
-  const size_t n;
+  const int n;
   const function<T(const T, const T)> unite;
   const T DEFAULT;
 
@@ -25,7 +25,7 @@ public:
       const int ones = (1 << i) - 1;
       T now = DEFAULT;
       st_a[i].resize(n, DEFAULT);
-      for (int j = 0; j < (int) n; j++) {
+      for (int j = 0; j < n; j++) {
         now = st_a[i][j] = unite(now, a[j]);
         if ((j & ones) == ones) {
           now = DEFAULT;
@@ -33,7 +33,7 @@ public:
       }
       now = DEFAULT;
       st_b[i].resize(n, DEFAULT);
-      for (int j = (int) n - 1; j >= 0; j--) {
+      for (int j = n - 1; j >= 0; j--) {
         now = st_b[i][j] = unite(now, a[j]);
         if ((j & ones) == 0) {
           now = DEFAULT;
@@ -42,7 +42,7 @@ public:
     }
   }
 
-  inline size_t size() const {
+  inline int size() const {
     return n;
   }
 
