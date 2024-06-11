@@ -125,9 +125,9 @@ class combinatorics {
 
 private:
 
-  static vector<modular<M>> _fact, _inv_fact;
+  static inline vector<modular<M>> _fact = {1}, _inv_fact = {1};
 
-  inline void ensure(const int n) const {
+  static inline void ensure(const int n) {
     assert(n >= 0);
     while ((int) _fact.size() < n + 1) {
       _fact.push_back(_fact.back() * (int) _fact.size());
@@ -137,17 +137,17 @@ private:
 
 public:
 
-  inline modular<M> fact(const int n) const {
+  static inline modular<M> fact(const int n) {
     ensure(n);
     return _fact[n];
   }
 
-  inline modular<M> inv_fact(const int n) const {
+  static inline modular<M> inv_fact(const int n) {
     ensure(n);
     return _inv_fact[n];
   }
 
-  inline modular<M> permute(const int n, const int k) const {
+  static inline modular<M> permute(const int n, const int k) {
     if (k < 0 || k > n) {
       return 0;
     }
@@ -155,7 +155,7 @@ public:
     return _fact[n] * _inv_fact[n - k];
   }
 
-  inline modular<M> choice(const int n, const int k) const {
+  static inline modular<M> choice(const int n, const int k) {
     if (k < 0 || k > n) {
       return 0;
     }
@@ -163,8 +163,6 @@ public:
     return _fact[n] * _inv_fact[n - k] * _inv_fact[k];
   }
 };
-template <const int64_t M> vector<modular<M>> combinatorics<M>::_fact(1, 1);
-template <const int64_t M> vector<modular<M>> combinatorics<M>::_inv_fact(1, 1);
 
 using mint_t = modular<MOD>;
 using math_t = combinatorics<MOD>;
